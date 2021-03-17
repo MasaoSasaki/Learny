@@ -13,7 +13,7 @@ class MyDocument extends Document {
           <meta name="description" content="Hello, World!" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <body>
+        <body className="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover dark:text-gray-100">
           <Main />
           <NextScript />
         </body>

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { VFC } from "react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const items = [
   { href: "/", label: "Home" },
@@ -11,6 +13,9 @@ const items = [
 ];
 
 export const Header: VFC = () => {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   return (
     <header>
       <h1>Title</h1>
@@ -23,6 +28,15 @@ export const Header: VFC = () => {
           );
         })}
       </nav>
+      {/* Pin to top right corner  */}
+      <div className="absolute top-0 right-0 h-12 w-18 p-4">
+        <button
+          className="js-change-theme focus:outline-none"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        >
+          🌙
+        </button>
+      </div>
     </header>
   );
 };

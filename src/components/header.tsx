@@ -3,7 +3,10 @@ import type { VFC } from "react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
-const items = [
+const items: {
+  href: string;
+  label: string;
+}[] = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/workbook", label: "WorkBook" },

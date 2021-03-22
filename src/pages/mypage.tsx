@@ -3,9 +3,13 @@ import { ProfileCard } from "../components/profile-card";
 import { LearningConfig } from "../components/learning-config";
 import { GetServerSideProps } from "next";
 
-type Props = { workCount: number };
+type Props = {
+  workCount: number
+  data: any
+};
 
 export default function MyPage(props: Props): JSX.Element {
+  console.log(props.data)
   return (
     <Layout>
       <div className="max-w-4xl lg:max-w-6xl flex justify-around items-center h-auto flex-wrap mx-auto my-20 lg:my-0">
@@ -17,7 +21,13 @@ export default function MyPage(props: Props): JSX.Element {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  const res = await fetch("http://localhost:3000/works");
   const data = await res.json();
-  return { props: { workCount: data.length } }
+  console.log(res)
+  return {
+    props: {
+      data: data,
+      workCount: data.length
+    }
+  }
 }

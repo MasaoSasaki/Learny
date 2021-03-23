@@ -21,9 +21,8 @@ export default function MyPage(props: Props): JSX.Element {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const res = await fetch("http://localhost:3000/works");
+  const res = await fetch("http://localhost:3000/users/2/works");
   const data = await res.json();
-  console.log(res)
   return {
     props: {
       data: data,

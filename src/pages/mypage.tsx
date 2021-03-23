@@ -4,12 +4,11 @@ import { LearningConfig } from "../components/learning-config";
 import { GetServerSideProps } from "next";
 
 type Props = {
-  workCount: number
+  workCount: number,
   data: any
 };
 
 export default function MyPage(props: Props): JSX.Element {
-  console.log(props.data)
   return (
     <Layout>
       <div className="max-w-4xl lg:max-w-6xl flex justify-around items-center h-auto flex-wrap mx-auto my-20 lg:my-0">
@@ -26,7 +25,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
   return {
     props: {
       data: data,
-      workCount: data.length
+      workCount: data.length,
     }
   }
 }

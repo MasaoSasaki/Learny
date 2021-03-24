@@ -21,14 +21,14 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
     <div className="w-full lg:w-5/12 rounded-lg lg:rounded-l-lg shadow-2xl bg-white opacity-75 mx-4 my-12 dark:bg-gray-900">
       <div className="p-4 md:p-12 text-center lg:text-left dark:bg-gray-800">
         <div className="block">
-          <span className="text-gray-700">出題設定</span>
+          <span>出題設定</span>
           <div className="mt-2 text-left">
             <div>
               <label className={`${"inline-flex items-center"} ${isAll && "opacity-25"}`} htmlFor="count">
                 <span>出題数</span>
                 <input
                   type="number"
-                  className="form-input border ml-2 w-2/6"
+                  className="form-input border ml-2 w-2/6 text-green-900"
                   id="count"
                   value={count}
                   min="1"
@@ -44,12 +44,7 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
             </div>
             <div>
               <label className="inline-flex items-center" htmlFor="random" onChange={() => setRandom(!isRandom)}>
-                <input
-                  type="checkbox"
-                  className="form-checkbox"
-                  defaultChecked
-                  id="random"
-                />
+                <input type="checkbox" className="form-checkbox" defaultChecked id="random" />
                 <span className="ml-2">出題順をランダムにする。</span>
               </label>
             </div>
@@ -59,12 +54,7 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
                 htmlFor="unAnswered"
                 onChange={() => setUnAnswered(!isUnAnswered)}
               >
-                <input
-                  type="checkbox"
-                  className="form-checkbox"
-                  defaultChecked
-                  id="unAnswered"
-                />
+                <input type="checkbox" className="form-checkbox" defaultChecked id="unAnswered" />
                 <span className="ml-2">未回答を優先する。(全体の50%)</span>
               </label>
             </div>

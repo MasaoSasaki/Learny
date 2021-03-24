@@ -6,10 +6,10 @@ type Props = { workCount: number };
 
 export function LearningConfig({ workCount }: Props): JSX.Element {
   const router: NextRouter = useRouter();
-  const [isRandom, setRandom] = useState<boolean>(true);
-  const [isUnAnswered, setUnAnswered] = useState<boolean>(true);
-  const [isAll, setAll] = useState<boolean>(false);
-  const [count, setCount] = useState<string>("10");
+  const [isRandom, setRandom] = useState<boolean>(true);            // ランダムで出題するか？
+  const [isUnAnswered, setUnAnswered] = useState<boolean>(true);    // 未回答を優先するか？
+  const [isAll, setAll] = useState<boolean>(false);                 // 全ての問題を出題するか？
+  const [count, setCount] = useState<string>("10");                 // 何問出題するか？
   const clickButton = () => {
     router.push({
       pathname: "/learning",
@@ -35,7 +35,7 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
                   onChange={(e) => {
                     setCount(e.target.value);
                   }}
-                  // disabled
+                  disabled={isAll && true}
                 />
               </label>
               <label className="inline-flex items-center" htmlFor="all" onChange={() => setAll(!isAll)}>

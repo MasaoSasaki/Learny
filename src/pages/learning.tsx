@@ -12,6 +12,7 @@ type Props = {
 export default function Learning(props: Props): JSX.Element {
   const router = useRouter();
   console.log(props.data[0], props.count, props.workCount)
+  console.log(props.data)
   return (
     <Layout>
       <h2>カテゴリー：{ props.data[0].workBook}</h2>
@@ -24,7 +25,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
   const count = context.query.count;
   const isAll = context.query.all
   const res = isAll === "true"
-    ? await fetch(`http://localhost:3000/users/1/works`)
+    ? await fetch(`http://localhost:3000/users/2/works`)
     : await fetch(`http://localhost:3000/users/${count}/works`); // TODO: countをuserIdに変更
   const data = await res.json();
   return {

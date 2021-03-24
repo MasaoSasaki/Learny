@@ -35,6 +35,7 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
                   onChange={(e) => {
                     setCount(e.target.value);
                   }}
+                  // disabled
                 />
               </label>
               <label className="inline-flex items-center" htmlFor="all" onChange={() => setAll(!isAll)}>

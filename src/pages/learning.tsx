@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
   const count = context.query.count;
   const isAll = context.query.all
   const res = isAll === "true"
-    ? await fetch(`http://localhost:3000/works`)
+    ? await fetch(`http://localhost:3000/users/1/works`)
     : await fetch(`http://localhost:3000/users/${count}/works`); // TODO: countをuserIdに変更
   const data = await res.json();
   return {

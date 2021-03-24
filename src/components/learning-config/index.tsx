@@ -6,49 +6,65 @@ type Props = { workCount: number };
 
 export function LearningConfig({ workCount }: Props): JSX.Element {
   const router: NextRouter = useRouter();
-  const [random, setRandom] = useState<boolean>(true);
-  const [unAnswered, setUnAnswered] = useState<boolean>(true);
-  const [count, setCount] = useState<number | null>(10);
+  const [isRandom, setRandom] = useState<boolean>(true);
+  const [isUnAnswered, setUnAnswered] = useState<boolean>(true);
+  const [isAll, setAll] = useState<boolean>(false);
+  const [count, setCount] = useState<string>("10");
   const clickButton = () => {
     router.push({
       pathname: "/learning",
-      query: { random: random, unAnswered: unAnswered, count: count },
+      query: { random: isRandom, unAnswered: isUnAnswered, count: count, all: isAll },
     });
   };
-  console.log(random, unAnswered, count);
+  console.log(isRandom, isUnAnswered, count, isAll);
   return (
     <div className="w-full lg:w-5/12 rounded-lg lg:rounded-l-lg shadow-2xl bg-white opacity-75 mx-4 my-12 dark:bg-gray-900">
       <div className="p-4 md:p-12 text-center lg:text-left dark:bg-gray-800">
-        {workCount}
-        <div className="block text-left">
+        <div className="block">
           <span className="text-gray-700">出題設定</span>
-          <div className="mt-2">
+          <div className="mt-2 text-left">
             <div>
-              <input
-                type="number"
-                className="form"
-                id="count"
-                onClick={(e) => {
-                  setCount(e.target.value);
-                }}
-              />
-              <label className="inline-flex items-center" htmlFor="count">
-                <span className="ml-2">問題数</span>
+              <label className={`${"inline-flex items-center"} ${isAll && "opacity-25"}`} htmlFor="count">
+                <span>出題数</span>
+                <input
+                  type="number"
+                  className="form-input border ml-2 w-2/6"
+                  id="count"
+                  value={count}
+                  min="1"
+                  onChange={(e) => {
+                    setCount(e.target.value);
+                  }}
+                />
+              </label>
+              <label className="inline-flex items-center" htmlFor="all" onChange={() => setAll(!isAll)}>
+                <input type="checkbox" className="form-checkbox" id="all" />
+                <span className="ml-2">全て(全 {workCount} 問)</span>
               </label>
             </div>
             <div>
-              <input type="checkbox" className="form-checkbox" defaultChecked id="random" />
-              <label className="inline-flex items-center" htmlFor="random" onClick={() => setRandom(!random)}>
+              <label className="inline-flex items-center" htmlFor="random" onChange={() => setRandom(!isRandom)}>
+                <input
+                  type="checkbox"
+                  className="form-checkbox"
+                  defaultChecked
+                  id="random"
+                />
                 <span className="ml-2">出題順をランダムにする。</span>
               </label>
             </div>
             <div>
-              <input type="checkbox" className="form-checkbox" defaultChecked id="unAnswered" />
               <label
                 className="inline-flex items-center"
                 htmlFor="unAnswered"
-                onClick={() => setUnAnswered(!unAnswered)}
+                onChange={() => setUnAnswered(!isUnAnswered)}
               >
+                <input
+                  type="checkbox"
+                  className="form-checkbox"
+                  defaultChecked
+                  id="unAnswered"
+                />
                 <span className="ml-2">未回答を優先する。(全体の50%)</span>
               </label>
             </div>

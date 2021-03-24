@@ -12,7 +12,7 @@ const items: {
   { href: "/workbook", label: "WorkBook" },
   // { href: "/workbook/create", label: "Create" },
   // { href: "/workbook/edit", label: "Edit" },
-  // { href: "/mypage", label: "MyPage" },
+  { href: "/mypage", label: "MyPage" },
 ];
 
 export const Header: VFC = () => {

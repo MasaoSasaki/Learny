@@ -25,8 +25,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
   const count = context.query.count;
   const isAll = context.query.all
   const res = isAll === "true"
-    ? await fetch(`http://localhost:3000/users/2/works`)
-    : await fetch(`http://localhost:3000/users/${count}/works`); // TODO: countをuserIdに変更
+    ? await fetch(`http://localhost:3000/users/1/works?isAll=true`)
+    : await fetch(`http://localhost:3000/users/1/works?count=${count}`);
   const data = await res.json();
   return {
     props: {

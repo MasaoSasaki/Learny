@@ -9,7 +9,7 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
   const [isRandom, setRandom] = useState<boolean>(true);            // ランダムで出題するか？
   const [isUnAnswered, setUnAnswered] = useState<boolean>(true);    // 未回答を優先するか？
   const [isAll, setAll] = useState<boolean>(false);                 // 全ての問題を出題するか？
-  const [count, setCount] = useState<string>("10");                 // 何問出題するか？
+  const [count, setCount] = useState<string>(String(workCount));                 // 何問出題するか？
   const clickButton = () => {
     router.push({
       pathname: "/learning",
@@ -32,13 +32,14 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
                   id="count"
                   value={count}
                   min="1"
+                  max={String(workCount)}
                   onChange={(e) => {
                     setCount(e.target.value);
                   }}
                   disabled={isAll && true}
                 />
               </label>
-              <label className="inline-flex items-center" htmlFor="all" onChange={() => setAll(!isAll)}>
+              <label className="inline-flex items-center ml-5" htmlFor="all" onChange={() => setAll(!isAll)}>
                 <input type="checkbox" className="form-checkbox" id="all" />
                 <span className="ml-2">全て(全 {workCount} 問)</span>
               </label>

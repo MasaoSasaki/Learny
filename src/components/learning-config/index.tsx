@@ -1,4 +1,3 @@
-import styles from "./index.module.scss";
 import { NextRouter, useRouter } from "next/router";
 import { useState } from "react";
 
@@ -18,8 +17,8 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
   };
   console.log(isRandom, isUnAnswered, count, isAll);
   return (
-    <div className="w-full lg:w-5/12 rounded-lg lg:rounded-l-lg shadow-2xl bg-white opacity-75 mx-4 my-12 dark:bg-gray-900">
-      <div className="p-4 md:p-12 text-center lg:text-left dark:bg-gray-800">
+    <div className="w-full lg:w-5/12 rounded-lg lg:rounded-l-lg shadow-2xl bg-white mx-4 my-12 dark:bg-gray-700">
+      <div className="p-4 md:p-12 text-center lg:text-left">
         <div className="block">
           <span>出題設定</span>
           <div className="mt-2 text-left">
@@ -28,7 +27,7 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
                 <span>出題数</span>
                 <input
                   type="number"
-                  className="form-input border ml-2 w-2/6 text-green-900"
+                  className="form-input border ml-2 w-2/6 text-blue-900"
                   id="count"
                   value={count}
                   min="1"
@@ -64,7 +63,7 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
         </div>
 
         <button
-          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
           onClick={() => clickButton()}
         >
           開始する

@@ -20,7 +20,7 @@ export const Header: VFC = () => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   return (
-    <header>
+    <header className="p-4">
       <h1>Title</h1>
       <nav>
         {items.map(({ href, label }) => {

@@ -27,7 +27,7 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
                 <span>出題数</span>
                 <input
                   type="number"
-                  className="form-input border ml-2 w-2/6 text-blue-900"
+                  className="form-input rounded ml-2 w-2/6 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-1"
                   id="count"
                   value={count}
                   min="1"
@@ -56,6 +56,7 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
                 onChange={() => setUnAnswered(!isUnAnswered)}
               >
                 <input type="checkbox" className="form-checkbox" defaultChecked id="unAnswered" />
+                  {/* TODO: わかりやすい表現に変更する */}
                 <span className="ml-2">未回答を優先する。(全体の50%)</span>
               </label>
             </div>

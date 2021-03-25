@@ -32,7 +32,7 @@ export function SocialLink(): JSX.Element {
         return (
           <a key={index} className="link" href="#" data-tippy-content={type}>
             <svg
-              className="h-6 fill-current hover:text-green-700"
+              className="h-6 fill-current hover:text-blue-700"
               role="img"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"

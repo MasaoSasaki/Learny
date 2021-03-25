@@ -21,7 +21,7 @@ export const Header: VFC = () => {
   useEffect(() => setMounted(true), []);
   return (
     <header className="p-4">
-      <h1>Title</h1>
+      <h1>Laerny</h1>
       <nav>
         {items.map(({ href, label }) => {
           return (

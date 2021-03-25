@@ -10,7 +10,7 @@ export function ProfileCard({ name }: Props): JSX.Element {
       <div className="p-4 md:p-12 text-center lg:text-left">
         {/* Image for mobile view */}
         <div className="block rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"></div>
-        <h1 className="text-3xl font-bold pt-8 lg:pt-0">{name}</h1>
+        <h2 className="text-3xl font-bold pt-8 lg:pt-0">{name}</h2>
         <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-blue-500"></div>
         <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
           <svg className="h-4 fill-current text-blue-700 pr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

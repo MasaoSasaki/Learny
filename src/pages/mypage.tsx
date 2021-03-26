@@ -11,7 +11,7 @@ type Props = {
 export default function MyPage(props: Props): JSX.Element {
   return (
     <Layout>
-      <div className="max-w-4xl lg:max-w-6xl flex justify-around items-center h-auto flex-wrap mx-auto my-20 lg:my-0">
+      <div className="max-w-4xl lg:max-w-6xl flex justify-around items-center h-auto flex-wrap mx-auto my-16 lg:my-0">
         <ProfileCard name={props.name} />
         <LearningConfig workCount={props.workCount} />
       </div>
@@ -20,14 +20,14 @@ export default function MyPage(props: Props): JSX.Element {
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const resUser = await fetch("http://localhost:3000/users/1"); // TODO: ログイン中のユーザーIDに変更する
-  const dataUser = await resUser.json();
-  const resWork = await fetch("http://localhost:3000/users/1/works"); // TODO: ログイン中のユーザーIDに変更する
-  const dataWork = await resWork.json();
+  const resUser = await fetch("http://localhost:3000/users/1"); // TODO: 1を動的に変更
+  const userData = await resUser.json();
+  const resWork = await fetch("http://localhost:3000/users/1/works"); // TODO: 1を動的に変更
+  const workData = await resWork.json();
   return {
     props: {
-      name: dataUser[0].name,
-      workCount: dataWork.length,
+      name: userData[0].name,
+      workCount: workData.length,
     },
   };
 };

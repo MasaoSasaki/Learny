@@ -8,7 +8,7 @@ export function LearningConfig({ workCount }: Props): JSX.Element {
   const [isRandom, setRandom] = useState<boolean>(true);            // ランダムで出題するか？
   const [isUnAnswered, setUnAnswered] = useState<boolean>(true);    // 未回答を優先するか？
   const [isAll, setAll] = useState<boolean>(false);                 // 全ての問題を出題するか？
-  const [count, setCount] = useState<string>(String(workCount));                 // 何問出題するか？
+  const [count, setCount] = useState<string>(String(workCount));    // 何問出題するか？
   const clickButton = () => {
     router.push({
       pathname: "/learning",

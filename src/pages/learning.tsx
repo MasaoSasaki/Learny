@@ -1,19 +1,21 @@
 import { Layout } from "src/components/layout";
 import { Question } from "src/components/question";
 import { GetServerSideProps } from "next";
-import type { ListWork } from "../models/work";
+import type { WorkList } from "../models/work";
+import type { AnswerList } from "../models/answer";
 import { useState } from "react";
 
 type Props = {
-  data: ListWork[];
+  workData: WorkList[];
+  answerData: AnswerList[];
 };
 
 export default function Learning(props: Props): JSX.Element {
-  const [tmpAnswerData, setTmpAnswerData] = useState<ListWork[]>(props.data);
+  const [tmpAnswerData, setTmpAnswerData] = useState<WorkList[]>(props.workData);
   console.log(tmpAnswerData);
   return (
     <Layout>
-      <Question workData={props.data} onClick={setTmpAnswerData} />
+      <Question workData={props.workData} answerData={props.answerData} onClick={setTmpAnswerData} />
     </Layout>
   );
 }
@@ -21,14 +23,17 @@ export default function Learning(props: Props): JSX.Element {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const count = context.query.count;
   const isAll = context.query.all;
-  const res =
+  const resWork =
     isAll === "true"
       ? await fetch(`http://localhost:3000/users/1/works?isAll=true`)
       : await fetch(`http://localhost:3000/users/1/works?count=${count}`);
-  const data = await res.json();
+  const resAnswer = await fetch(`https://localhost:3000/answers`);
+  const workData = await resWork.json();
+  const answerData = await resAnswer.json();
   return {
     props: {
-      data: data,
+      workData: workData,
+      answerData: answerData,
     },
   };
 };

@@ -1,28 +1,53 @@
 import { useState } from "react";
-import type { ListWork } from "src/models/work";
+import type { WorkList } from "src/models/work";
+import type { AnswerList } from "src/models/answer";
 
 type Props = {
-  workData: ListWork[];
+  workData: WorkList[];
+  answerData: AnswerList[];
   onClick: Function;
 };
 
-export function Question({ workData, onClick }: Props): JSX.Element {
-  console.log(workData)
+export function Question({ workData, answerData, onClick }: Props): JSX.Element {
+  console.log(workData);
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const questionData = workData[pageNumber - 1];
   const form = () => {
-    switch (workData[pageNumber - 1].type) {
+    switch (questionData.type) {
       case "mulch":
         return (
           <>
-            <input type="checkbox" className="my-4 block form-checkbox h-5 w-5 text-blue-600" />
-            <input type="checkbox" className="my-4 block form-checkbox h-5 w-5 text-blue-600" />
+            {answerData.map(({ workId, answer }, index) => {
+              if (workId !== String(questionData.id)) return;
+              return (
+                <div className="m-3" key={index}>
+                  <label className="flex items-center">
+                    <input type="checkbox" className="m-2 form-checkbox h-5 w-5" />
+                    <span className="ml-2">{answer}</span>
+                  </label>
+                </div>
+              );
+            })}
           </>
         ); // TODO: 回答数に合わせて動的に変更
       case "only":
         return (
           <>
-            <input type="radio" className="my-4 block form-radio h-5 w-5 text-blue-600" />
-            <input type="radio" className="my-4 block form-radio h-5 w-5 text-blue-600" />
+            {answerData.map(({ workId, answer }, index) => {
+              if (workId !== String(questionData.id)) return;
+              return (
+                <div className="m-3" key={index}>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name={`question${questionData.id}`}
+                      className="m-2 block form-radio h-5 w-5 text-blue-600"
+                    />
+                    <span className="ml-2">{answer}</span>
+                  </label>
+                </div>
+              );
+            })}
           </>
         ); // TODO: 回答数に合わせて動的に変更
       case "keyword":
@@ -50,21 +75,30 @@ export function Question({ workData, onClick }: Props): JSX.Element {
     <div className="w-11/12 lg:w-10/12 rounded-lg lg:rounded-l-lg shadow-2xl bg-white mx-auto my-12 dark:bg-gray-700">
       <div className="p-4 text-left lg:text-left">
         <h2 className="text-3xl font-bold pt-8 lg:pt-0">問題：{pageNumber}</h2>
-        <p>{workData[pageNumber - 1].question}</p>
+        <p>{questionData.question}</p>
         <div className="mx-auto w-full pt-3 border-b-2 border-blue-500"></div>
-        <div className="mt-4 px-4 py-8 bg-blue-50 shadow-inner border-white rounded-xl dark:bg-gray-800">
-          {form()}
-        </div>
+        <div className="mt-4 px-4 py-6 bg-blue-50 shadow-inner border-white rounded-xl dark:bg-gray-800">{form()}</div>
         <div className="pt-12 pb-8 text-center">
           <div className="inline-flex">
             <button
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
+              className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l ${
+                pageNumber === 1 && "hidden"
+              }`}
               onClick={() => movePage("prev")}
             >
               Prev
             </button>
             <button
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r"
+              className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 ${
+                pageNumber === 0 || "hidden"
+              }`}
+            >
+              回答を送信する
+            </button>
+            <button
+              className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r ${
+                pageNumber === workData.length && "hidden"
+              }`}
               onClick={() => movePage("next")}
             >
               Next

@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import type { ListWork } from "src/models/work";
+import type { WorkList } from "src/models/work";
 import { EXAMPLE_WORK_LIST } from "src/models/work";
 
 const shuffle = ([...array]) => {
@@ -12,9 +12,9 @@ const shuffle = ([...array]) => {
 
 export const worksHandlers = [
   // 特定のユーザーの問題集をcount分取得する
-  rest.get<never, ListWork[], { userId: string; tmpWorkList: ListWork[] }>("*/users/:userId/works", (req, res, ctx) => {
+  rest.get<never, WorkList[], { userId: string; tmpWorkList: WorkList[] }>("*/users/:userId/works", (req, res, ctx) => {
     const { userId } = req.params;
-    var workList: ListWork[] = shuffle(EXAMPLE_WORK_LIST.filter((work) => work.userId == userId));
+    var workList: WorkList[] = shuffle(EXAMPLE_WORK_LIST.filter((work) => work.userId == userId));
 
     if (req.url.searchParams.get("isAll") === "true") {
     } else if (req.url.searchParams.get("count")) {
@@ -22,8 +22,8 @@ export const worksHandlers = [
       workList.length > Number(req.url.searchParams.get("count"))
       ? Number(req.url.searchParams.get("count"))
       : workList.length;
-      const tmpWorkList: ListWork[] = EXAMPLE_WORK_LIST.filter((work) => work.userId == userId);
-      var workList: ListWork[] = new Array();
+      const tmpWorkList: WorkList[] = EXAMPLE_WORK_LIST.filter((work) => work.userId == userId);
+      var workList: WorkList[] = new Array();
       var randArray: number[] = new Array();
       let i: number = 0;
       while (i < count) {
@@ -37,10 +37,5 @@ export const worksHandlers = [
     }
 
     return res(ctx.delay(1000), ctx.status(200), ctx.json(workList));
-  }),
-
-  // 特定のユーザーの問題集一覧を取得する
-  rest.get<never, ListWork[]>("*/works", (req, res, ctx) => {
-    return res(ctx.delay(1000), ctx.status(200), ctx.json(EXAMPLE_WORK_LIST));
   }),
 ];

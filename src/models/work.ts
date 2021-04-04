@@ -1,4 +1,4 @@
-export type ListWork = {
+export type WorkList = {
   id: string,
   userId: string,
   workBook: string,
@@ -6,7 +6,7 @@ export type ListWork = {
   type: 'mulch' | 'only' | 'keyword'
 }
 
-export const EXAMPLE_WORK_LIST: ListWork[] = [
+export const EXAMPLE_WORK_LIST: WorkList[] = [
   {
     id: "1",
     userId: "1",

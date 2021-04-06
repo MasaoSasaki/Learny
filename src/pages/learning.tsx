@@ -12,10 +12,11 @@ type Props = {
 
 export default function Learning(props: Props): JSX.Element {
   const [tmpAnswerData, setTmpAnswerData] = useState<WorkList[]>(props.workData);
-  console.log(tmpAnswerData);
+  const workData = props.workData.map((item, index) => ({ ...item, questionId: index + 1 }));
+  console.log(workData);
   return (
     <Layout>
-      <Question workData={props.workData} answerData={props.answerData} onClick={setTmpAnswerData} />
+      <Question workData={workData} answerData={props.answerData} onClick={setTmpAnswerData} />
     </Layout>
   );
 }

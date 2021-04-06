@@ -1,5 +1,3 @@
-import styles from "./index.module.scss";
-
 const items: {
   title: string;
   type: string;

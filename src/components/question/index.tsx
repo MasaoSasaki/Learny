@@ -8,17 +8,24 @@ type Props = {
   onClick: Function;
 };
 
+type tmpUserAnswer = {
+  workId: number;
+  answer: string;
+};
+
 export function Question({ workData, answerData, onClick }: Props): JSX.Element {
-  console.log(workData);
+  let tmpUserAnswers: tmpUserAnswer[] = new Array();
   const [pageNumber, setPageNumber] = useState<number>(1);
-  const questionData = workData[pageNumber - 1];
-  const form = () => {
+  const [userAnswers, setUserAnswers] = useState<tmpUserAnswer[]>([]);
+  const [keyword, setKeyword] = useState<string>("");
+  const questionData: WorkList = workData[pageNumber - 1];
+  const form = (): JSX.Element => {
     switch (questionData.type) {
       case "mulch":
         return (
           <>
             {answerData.map(({ workId, answer }, index) => {
-              if (workId !== String(questionData.id)) return;
+              if (workId !== questionData.id) return;
               return (
                 <div className="m-3" key={index}>
                   <label className="flex items-center">
@@ -29,12 +36,12 @@ export function Question({ workData, answerData, onClick }: Props): JSX.Element 
               );
             })}
           </>
-        ); // TODO: 回答数に合わせて動的に変更
+        );
       case "only":
         return (
           <>
             {answerData.map(({ workId, answer }, index) => {
-              if (workId !== String(questionData.id)) return;
+              if (workId !== questionData.id) return;
               return (
                 <div className="m-3" key={index}>
                   <label className="flex items-center">
@@ -49,17 +56,34 @@ export function Question({ workData, answerData, onClick }: Props): JSX.Element 
               );
             })}
           </>
-        ); // TODO: 回答数に合わせて動的に変更
+        );
       case "keyword":
         return (
           <input
             type="text"
+            value={keyword}
+            onChange={(e)=>setKeyword(e.target.value)}
             className="form-input h-full w-full border-gray-300 p-2 border-blue rounded-sm text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-1"
           />
         );
     }
   };
-  const movePage = (button: string) => {
+  const movePage = (button: string): void => {
+    switch (questionData.type) {
+      case "mulch":
+        break
+      case "only":
+        break
+      case "keyword":
+        const tmpUserAnswer: tmpUserAnswer = {
+          workId: questionData.id,
+          answer: keyword,
+        };
+        setKeyword("")
+        tmpUserAnswers = [...userAnswers, tmpUserAnswer];
+    }
+    // if (userAnswers.includes()) { }; // TODO: 新しい配列が問題ごとに重複しないようにする。
+    setUserAnswers(tmpUserAnswers);
     switch (button) {
       case "next":
         if (pageNumber === workData.length) return;
@@ -70,6 +94,9 @@ export function Question({ workData, answerData, onClick }: Props): JSX.Element 
         setPageNumber(pageNumber - 1);
         break;
     }
+  };
+  const submit = (): void => {
+    alert("未回答があります。送信してよろしいですか？\n（未回答分は保存されません。）");
   };
   return (
     <div className="w-11/12 lg:w-10/12 rounded-lg lg:rounded-l-lg shadow-2xl bg-white mx-auto my-12 dark:bg-gray-700">
@@ -89,9 +116,10 @@ export function Question({ workData, answerData, onClick }: Props): JSX.Element 
               Prev
             </button>
             <button
-              className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 ${
-                pageNumber === 0 || "hidden"
-              }`}
+              className={`bg-blue-300 hover:bg-blue-400 text-gray-800 font-bold py-2 px-4 ${
+                pageNumber === 1 && "rounded-l"
+              } ${pageNumber === workData.length && "rounded-r"}`}
+              onClick={() => submit()}
             >
               回答を送信する
             </button>

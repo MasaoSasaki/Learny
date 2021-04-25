@@ -50,7 +50,7 @@ export const EXAMPLE_ANSWER_LIST: TypeAnswer[] = [
   },
   {
     id: 7,
-    questionId: 4,
+    questionId: 3,
     answer: "村上春樹",
     right: false
   },

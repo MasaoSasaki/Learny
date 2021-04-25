@@ -3,6 +3,7 @@ import { Question } from "src/components/question";
 import { GetServerSideProps } from "next";
 import type { TypeQuestion } from "../models/question";
 import type { TypeAnswer } from "../models/answer";
+import {shuffle} from "src/function"
 
 type Props = {
   questionDataList: TypeQuestion[] & { questionId: number };
@@ -10,7 +11,7 @@ type Props = {
 };
 
 export default function Learning(props: Props): JSX.Element {
-  const questionDataList = props.questionDataList.map((item, index) => ({ ...item, questionId: index + 1 }));
+  const questionDataList = shuffle<TypeQuestion>(props.questionDataList).map((item, index) => ({ ...item, questionId: index + 1 }));
   return (
     <Layout>
       <Question questionDataList={questionDataList} answerDataList={props.answerDataList} />

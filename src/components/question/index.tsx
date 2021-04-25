@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type { TypeQuestion } from "src/models/question";
 import type { TypeAnswer } from "src/models/answer";
+import { shuffle } from "src/function";
 
 type Props = {
   questionDataList: TypeQuestion[];
@@ -13,6 +14,7 @@ type tmpUserAnswer = {
 };
 
 export function Question({ questionDataList, answerDataList }: Props): JSX.Element {
+  console.log("test" + "test");
   console.log("render------------------------------------------------------------------");
   const [pageNumber, changePageNumber] = useState<number>(1);
   console.log("pageNumber", pageNumber);
@@ -22,6 +24,7 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
   console.log("answerWordは", answerWord, "でレンダリングしました。");
   const questionData: TypeQuestion = questionDataList[pageNumber - 1];
   console.log("questionData", questionData);
+
   useEffect(() => {
     console.log("useEffect-----------------------------", answerWord);
     console.log(userAnswers[pageNumber - 1] ? userAnswers[pageNumber - 1].answer : "未回答です。");
@@ -34,14 +37,13 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
       setAnswerWord(userAnswers[pageNumber - 1].answer);
       console.log("false answerWordを", answerWord, "に変更しました。");
     }
-  }, [pageNumber]),
-    [];
+  }, [pageNumber]);
   const form = (): JSX.Element => {
     switch (questionData.type) {
       case "mulch":
         return (
           <>
-            {answerDataList.map(({ questionId, answer }, index) => {
+            {shuffle<TypeAnswer>(answerDataList).map(({ questionId, answer }, index) => {
               if (questionId !== questionData.id) return;
               return (
                 <div className="m-3" key={index}>
@@ -57,7 +59,7 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
       case "only":
         return (
           <>
-            {answerDataList.map(({ questionId, answer }, index) => {
+            {shuffle<TypeAnswer>(answerDataList).map(({ questionId, answer }, index) => {
               if (questionId !== questionData.id) return;
               return (
                 <div className="m-3" key={index}>
@@ -78,7 +80,7 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
         return (
           <input
             type="text"
-            value={answerWord} // TODO: フォームを変更せずに遷移するとdefaultValueの値が消える
+            value={answerWord}
             onChange={(e) => setAnswerWord(e.target.value)}
             className="form-input h-full w-full border-gray-300 p-2 border-blue rounded-sm text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-1"
           />
@@ -123,20 +125,10 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
     switch (button) {
       case "prev":
         if (pageNumber === 1) return;
-        // console.log("リセットしました。");
-        // if (questionDataList[pageNumber - 2].type === "word") {
-        //   setAnswerWord(userAnswers[pageNumber - 2].answer ? userAnswers[pageNumber - 2].answer : "空白");
-        //   console.log("answerWordを", answerWord, "に変更しました。");
-        // }
         changePageNumber(pageNumber - 1);
         break;
       case "next":
         if (pageNumber === questionDataList.length) return;
-        // console.log("リセットしました。");
-        // if (questionDataList[pageNumber].type === "word") {
-        //   setAnswerWord(userAnswers[pageNumber] ? userAnswers[pageNumber].answer : "空白");
-        //   console.log("answerWordを", answerWord, "に変更しました。");
-        // }
         changePageNumber(pageNumber + 1);
         break;
     }

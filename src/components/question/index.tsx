@@ -14,7 +14,6 @@ type tmpUserAnswer = {
 };
 
 export function Question({ questionDataList, answerDataList }: Props): JSX.Element {
-  console.log("test" + "test");
   console.log("render------------------------------------------------------------------");
   const [pageNumber, changePageNumber] = useState<number>(1);
   console.log("pageNumber", pageNumber);
@@ -43,7 +42,7 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
       case "mulch":
         return (
           <>
-            {shuffle<TypeAnswer>(answerDataList).map(({ questionId, answer }, index) => {
+            {answerDataList.map(({ questionId, answer }, index) => {
               if (questionId !== questionData.id) return;
               return (
                 <div className="m-3" key={index}>
@@ -59,7 +58,7 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
       case "only":
         return (
           <>
-            {shuffle<TypeAnswer>(answerDataList).map(({ questionId, answer }, index) => {
+            {answerDataList.map(({ questionId, answer }, index) => {
               if (questionId !== questionData.id) return;
               return (
                 <div className="m-3" key={index}>

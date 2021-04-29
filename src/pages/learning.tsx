@@ -5,18 +5,18 @@ import type { TypeQuestion } from "../models/question";
 import type { TypeAnswer } from "../models/answer";
 
 type Props = {
-  questionDataList: TypeQuestion[] & { questionId: number };
+  resQuestionDataList: TypeQuestion[] & { currentQuestionId: number };
   answerDataList: TypeAnswer[];
 };
 
 export default function Learning(props: Props): JSX.Element {
-  const questionDataList = props.questionDataList.map((item, index) => ({
+  const currentQuestionDataList = props.resQuestionDataList.map((item, index) => ({
     ...item,
-    questionId: index + 1,
+    currentQuestionId: index + 1,
   }));
   return (
     <Layout>
-      <Question questionDataList={questionDataList} answerDataList={props.answerDataList} />
+      <Question currentQuestionDataList={currentQuestionDataList} answerDataList={props.answerDataList} />
     </Layout>
   );
 }
@@ -24,16 +24,16 @@ export default function Learning(props: Props): JSX.Element {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const count = context.query.count;
   const isAll = context.query.all;
-  const resWork =
+  const resQuestion =
     isAll === "true"
       ? await fetch(`http://localhost:3000/users/1/questions?isAll=true`)
       : await fetch(`http://localhost:3000/users/1/questions?count=${count}`);
   const resAnswer = await fetch(`https://localhost:3000/answers`);
-  const questionDataList = await resWork.json();
+  const resQuestionDataList = await resQuestion.json();
   const answerDataList = await resAnswer.json();
   return {
     props: {
-      questionDataList: questionDataList,
+      resQuestionDataList: resQuestionDataList,
       answerDataList: answerDataList,
     },
   };

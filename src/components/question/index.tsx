@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import type { TypeQuestion } from "src/models/question";
 import type { TypeAnswer } from "src/models/answer";
-import { shuffle } from "src/function";
 
 type Props = {
-  questionDataList: TypeQuestion[];
+  currentQuestionDataList: TypeQuestion[];
   answerDataList: TypeAnswer[];
 };
 
@@ -13,28 +12,51 @@ type tmpUserAnswer = {
   answer: string;
 };
 
-export function Question({ questionDataList, answerDataList }: Props): JSX.Element {
+type tmpOnlyAnswer = {
+  questionId: number;
+  answer: string;
+};
+
+export function Question({ currentQuestionDataList, answerDataList }: Props): JSX.Element {
   console.log("render------------------------------------------------------------------");
   const [pageNumber, changePageNumber] = useState<number>(1);
   console.log("pageNumber", pageNumber);
   const [userAnswers, setUserAnswers] = useState<tmpUserAnswer[]>([]);
   console.log("userAnswers", userAnswers);
-  const [answerWord, setAnswerWord] = useState<string>("");
-  console.log("answerWordは", answerWord, "でレンダリングしました。");
-  const questionData: TypeQuestion = questionDataList[pageNumber - 1];
+  const [onlyAnswer, setOnlyAnswer] = useState<tmpOnlyAnswer>({ questionId: 0, answer: "" });
+  console.log("onlyAnswerは", onlyAnswer, "でレンダリングしました。");
+  const [wordAnswer, setWordAnswer] = useState<string>("");
+  console.log("answerWordは", wordAnswer, "でレンダリングしました。");
+  const questionData: TypeQuestion = currentQuestionDataList[pageNumber - 1];
   console.log("questionData", questionData);
 
   useEffect(() => {
-    console.log("useEffect-----------------------------", answerWord);
+    console.log("useEffect-----------------------------", wordAnswer);
     console.log(userAnswers[pageNumber - 1] ? userAnswers[pageNumber - 1].answer : "未回答です。");
-    if (questionData.type !== "word") return; // 問題のタイプがワード以外ならリターン
-    console.log("この問題はwordです");
-    if (userAnswers[pageNumber - 1] === undefined) {
-      setAnswerWord("");
-      console.log("true answerWordを", answerWord, "に変更しました。");
-    } else {
-      setAnswerWord(userAnswers[pageNumber - 1].answer);
-      console.log("false answerWordを", answerWord, "に変更しました。");
+    switch (questionData.type) {
+      case "mulch":
+        console.log("この問題はmulchです");
+        break;
+      case "only":
+        console.log("この問題はonlyです");
+        if (userAnswers[pageNumber - 1] === undefined) {
+          setOnlyAnswer({ questionId: 0, answer: "" });
+          console.log("true answerWordを", wordAnswer, "に変更しました。");
+        } else {
+          setOnlyAnswer({ questionId: userAnswers[pageNumber - 1].questionId, answer: userAnswers[pageNumber - 1].answer });
+          console.log("false answerWordを", wordAnswer, "に変更しました。");
+        }
+        break;
+      case "word":
+        console.log("この問題はwordです");
+        if (userAnswers[pageNumber - 1] === undefined) {
+          setWordAnswer("");
+          console.log("true answerWordを", wordAnswer, "に変更しました。");
+        } else {
+          setWordAnswer(userAnswers[pageNumber - 1].answer);
+          console.log("false answerWordを", wordAnswer, "に変更しました。");
+        }
+        break;
     }
   }, [pageNumber]);
   const form = (): JSX.Element => {
@@ -67,6 +89,8 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
                       type="radio"
                       name={`question${questionData.id}`}
                       className="m-2 block form-radio h-5 w-5 text-blue-600"
+                      onChange={() => setOnlyAnswer({ questionId: pageNumber, answer: answer })}
+                      checked={onlyAnswer.questionId === pageNumber && onlyAnswer.answer === answer}
                     />
                     <span className="ml-2">{answer}</span>
                   </label>
@@ -79,8 +103,8 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
         return (
           <input
             type="text"
-            value={answerWord}
-            onChange={(e) => setAnswerWord(e.target.value)}
+            value={wordAnswer}
+            onChange={(e) => setWordAnswer(e.target.value)}
             className="form-input h-full w-full border-gray-300 p-2 border-blue rounded-sm text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-1"
           />
         );
@@ -102,7 +126,7 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
       case "only":
         const tmpUserOnlyAnswer: tmpUserAnswer = {
           questionId: pageNumber,
-          answer: "onlyQuestion",
+          answer: onlyAnswer.answer,
         };
         !userAnswers[pageNumber - 1]
           ? setUserAnswers([...userAnswers, tmpUserOnlyAnswer])
@@ -113,7 +137,7 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
       case "word":
         const tmpUserWordAnswer: tmpUserAnswer = {
           questionId: pageNumber,
-          answer: answerWord,
+          answer: wordAnswer,
         };
         !userAnswers[pageNumber - 1]
           ? setUserAnswers([...userAnswers, tmpUserWordAnswer])
@@ -127,7 +151,7 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
         changePageNumber(pageNumber - 1);
         break;
       case "next":
-        if (pageNumber === questionDataList.length) return;
+        if (pageNumber === currentQuestionDataList.length) return;
         changePageNumber(pageNumber + 1);
         break;
     }
@@ -155,14 +179,14 @@ export function Question({ questionDataList, answerDataList }: Props): JSX.Eleme
             <button
               className={`bg-blue-300 hover:bg-blue-400 text-gray-800 font-bold py-2 px-4 ${
                 pageNumber === 1 && "rounded-l"
-              } ${pageNumber === questionDataList.length && "rounded-r"}`}
+              } ${pageNumber === currentQuestionDataList.length && "rounded-r"}`}
               onClick={() => submit()}
             >
               回答を送信する
             </button>
             <button
               className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r ${
-                pageNumber === questionDataList.length && "hidden"
+                pageNumber === currentQuestionDataList.length && "hidden"
               }`}
               onClick={() => movePage("next")}
             >

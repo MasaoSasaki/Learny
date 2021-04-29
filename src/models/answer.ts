@@ -54,4 +54,22 @@ export const EXAMPLE_ANSWER_LIST: TypeAnswer[] = [
     answer: "村上春樹",
     right: false
   },
+  {
+    id: 8,
+    questionId: 4,
+    answer: "ベートヴェン",
+    right: true
+  },
+  {
+    id: 9,
+    questionId: 4,
+    answer: "バッハ",
+    right: false
+  },
+  {
+    id: 10,
+    questionId: 4,
+    answer: "シューベルト",
+    right: false
+  },
 ];

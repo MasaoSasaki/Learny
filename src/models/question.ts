@@ -37,7 +37,7 @@ export const EXAMPLE_QUESTION_LIST: TypeQuestion[] = [
   },
   {
     id: 4,
-    userId: 2,
+    userId: 1,
     work: '音楽',
     question: '"運命"の作者は誰ですか？',
     type: 'only',

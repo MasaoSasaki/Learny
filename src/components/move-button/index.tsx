@@ -1,6 +1,6 @@
 import { TypeQuestion } from "src/models/question";
-import type { tmpUserAnswer } from "src/components/question";
-import type { tmpOnlyAnswer } from "src/components/question";
+import type { TempUserAnswer } from "src/components/question";
+import type { TempOnlyAnswer } from "src/components/question";
 
 type Props = {
   pageNumber: number;
@@ -8,8 +8,8 @@ type Props = {
   setUserAnswers: Function;
   currentQuestionDataList: TypeQuestion[];
   questionData: TypeQuestion;
-  userAnswers: tmpUserAnswer[]
-  onlyAnswer: tmpOnlyAnswer
+  userAnswers: TempUserAnswer[]
+  onlyAnswer: TempOnlyAnswer
   wordAnswer: string;
 };
 
@@ -26,7 +26,7 @@ export const MoveButton = ({
   const movePage = (button: string) => {
     switch (questionData.type) {
       case "mulch":
-        const tmpUserMulchAnswer: tmpUserAnswer = {
+        const tmpUserMulchAnswer: TempUserAnswer = {
           questionId: pageNumber,
           answer: "mulchQuestion",
         };
@@ -37,7 +37,7 @@ export const MoveButton = ({
             );
         break;
       case "only":
-        const tmpUserOnlyAnswer: tmpUserAnswer = {
+        const tmpUserOnlyAnswer: TempUserAnswer = {
           questionId: pageNumber,
           answer: onlyAnswer.answer,
         };
@@ -48,7 +48,7 @@ export const MoveButton = ({
             );
         break;
       case "word":
-        const tmpUserWordAnswer: tmpUserAnswer = {
+        const tmpUserWordAnswer: TempUserAnswer = {
           questionId: pageNumber,
           answer: wordAnswer,
         };

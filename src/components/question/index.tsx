@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 import type { TypeQuestion } from "src/models/question";
 import type { TypeAnswer } from "src/models/answer";
+import { MoveButton } from "src/components/move-button";
 
 type Props = {
   currentQuestionDataList: TypeQuestion[];
   answerDataList: TypeAnswer[];
 };
 
-type tmpUserAnswer = {
+export type tmpUserAnswer = {
   questionId: number;
   answer: string;
 };
 
-type tmpOnlyAnswer = {
+export type tmpOnlyAnswer = {
   questionId: number;
   answer: string;
 };
@@ -43,7 +44,10 @@ export function Question({ currentQuestionDataList, answerDataList }: Props): JS
           setOnlyAnswer({ questionId: 0, answer: "" });
           console.log("true answerWordを", wordAnswer, "に変更しました。");
         } else {
-          setOnlyAnswer({ questionId: userAnswers[pageNumber - 1].questionId, answer: userAnswers[pageNumber - 1].answer });
+          setOnlyAnswer({
+            questionId: userAnswers[pageNumber - 1].questionId,
+            answer: userAnswers[pageNumber - 1].answer,
+          });
           console.log("false answerWordを", wordAnswer, "に変更しました。");
         }
         break;
@@ -110,55 +114,6 @@ export function Question({ currentQuestionDataList, answerDataList }: Props): JS
         );
     }
   };
-  const movePage = (button: string) => {
-    switch (questionData.type) {
-      case "mulch":
-        const tmpUserMulchAnswer: tmpUserAnswer = {
-          questionId: pageNumber,
-          answer: "mulchQuestion",
-        };
-        !userAnswers[pageNumber - 1]
-          ? setUserAnswers([...userAnswers, tmpUserMulchAnswer])
-          : setUserAnswers(
-              userAnswers.map((userAnswer) => (userAnswer.questionId === pageNumber ? tmpUserMulchAnswer : userAnswer))
-            );
-        break;
-      case "only":
-        const tmpUserOnlyAnswer: tmpUserAnswer = {
-          questionId: pageNumber,
-          answer: onlyAnswer.answer,
-        };
-        !userAnswers[pageNumber - 1]
-          ? setUserAnswers([...userAnswers, tmpUserOnlyAnswer])
-          : setUserAnswers(
-              userAnswers.map((userAnswer) => (userAnswer.questionId === pageNumber ? tmpUserOnlyAnswer : userAnswer))
-            );
-        break;
-      case "word":
-        const tmpUserWordAnswer: tmpUserAnswer = {
-          questionId: pageNumber,
-          answer: wordAnswer,
-        };
-        !userAnswers[pageNumber - 1]
-          ? setUserAnswers([...userAnswers, tmpUserWordAnswer])
-          : setUserAnswers(
-              userAnswers.map((userAnswer) => (userAnswer.questionId === pageNumber ? tmpUserWordAnswer : userAnswer))
-            );
-    }
-    switch (button) {
-      case "prev":
-        if (pageNumber === 1) return;
-        changePageNumber(pageNumber - 1);
-        break;
-      case "next":
-        if (pageNumber === currentQuestionDataList.length) return;
-        changePageNumber(pageNumber + 1);
-        break;
-    }
-  };
-  const submit = (): void => {
-    alert("未回答があります。送信してよろしいですか？\n（未回答分は保存されません。）");
-  };
   return (
     <div className="w-11/12 lg:w-10/12 rounded-lg lg:rounded-l-lg shadow-2xl bg-white mx-auto my-12 dark:bg-gray-700">
       <div className="p-4 text-left lg:text-left">
@@ -166,34 +121,16 @@ export function Question({ currentQuestionDataList, answerDataList }: Props): JS
         <p>{questionData.question}</p>
         <div className="mx-auto w-full pt-3 border-b-2 border-blue-500" />
         <div className="mt-4 px-4 py-6 bg-blue-50 shadow-inner border-white rounded-xl dark:bg-gray-800">{form()}</div>
-        <div className="pt-12 pb-8 text-center">
-          <div className="inline-flex">
-            <button
-              className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l ${
-                pageNumber === 1 && "hidden"
-              }`}
-              onClick={() => movePage("prev")}
-            >
-              Prev
-            </button>
-            <button
-              className={`bg-blue-300 hover:bg-blue-400 text-gray-800 font-bold py-2 px-4 ${
-                pageNumber === 1 && "rounded-l"
-              } ${pageNumber === currentQuestionDataList.length && "rounded-r"}`}
-              onClick={() => submit()}
-            >
-              回答を送信する
-            </button>
-            <button
-              className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r ${
-                pageNumber === currentQuestionDataList.length && "hidden"
-              }`}
-              onClick={() => movePage("next")}
-            >
-              Next
-            </button>
-          </div>
-        </div>
+        <MoveButton
+          pageNumber={pageNumber}
+          changePageNumber={changePageNumber}
+          setUserAnswers={setUserAnswers}
+          currentQuestionDataList={currentQuestionDataList}
+          questionData={questionData}
+          userAnswers={userAnswers}
+          onlyAnswer={onlyAnswer}
+          wordAnswer={wordAnswer}
+        />
       </div>
     </div>
   );

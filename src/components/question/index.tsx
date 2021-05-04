@@ -14,7 +14,17 @@ export type TempUserAnswer = {
   answer: string;
 };
 
+export type TempMulchAnswer = {
+  questionId: number;
+  answer: number[];
+};
+
 export type TempOnlyAnswer = {
+  questionId: number;
+  answer: string;
+};
+
+export type TempWordAnswer = {
   questionId: number;
   answer: string;
 };
@@ -25,9 +35,11 @@ export function Question({ currentQuestionDataList, answerDataList }: Props): JS
   console.log("pageNumber", pageNumber);
   const [userAnswers, setUserAnswers] = useState<TempUserAnswer[]>([]);
   console.log("userAnswers", userAnswers);
+  const [mulchAnswer, setMulchAnswer] = useState<TempMulchAnswer>({ questionId: 0, answer: [] });
+  console.log("onlyAnswerは", mulchAnswer, "でレンダリングしました。");
   const [onlyAnswer, setOnlyAnswer] = useState<TempOnlyAnswer>({ questionId: 0, answer: "" });
   console.log("onlyAnswerは", onlyAnswer, "でレンダリングしました。");
-  const [wordAnswer, setWordAnswer] = useState<string>("");
+  const [wordAnswer, setWordAnswer] = useState<TempWordAnswer>({ questionId: 0, answer: "" });
   console.log("answerWordは", wordAnswer, "でレンダリングしました。");
   const questionData: TypeQuestion = currentQuestionDataList[pageNumber - 1];
   console.log("questionData", questionData);
@@ -55,10 +67,13 @@ export function Question({ currentQuestionDataList, answerDataList }: Props): JS
       case "word":
         console.log("この問題はwordです");
         if (userAnswers[pageNumber - 1] === undefined) {
-          setWordAnswer("");
+          setWordAnswer({ questionId: 0, answer: "" });
           console.log("true answerWordを", wordAnswer, "に変更しました。");
         } else {
-          setWordAnswer(userAnswers[pageNumber - 1].answer);
+          setWordAnswer({
+            questionId: userAnswers[pageNumber - 1].questionId,
+            answer: userAnswers[pageNumber - 1].answer,
+          });
           console.log("false answerWordを", wordAnswer, "に変更しました。");
         }
         break;

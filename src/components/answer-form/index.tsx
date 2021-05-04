@@ -1,6 +1,6 @@
 import { TypeQuestion } from "src/models/question";
 import { TypeAnswer } from "src/models/answer";
-import { TempOnlyAnswer } from "src/components/question";
+import { TempOnlyAnswer, TempWordAnswer } from "src/components/question";
 
 type Props = {
   questionData: TypeQuestion;
@@ -9,7 +9,7 @@ type Props = {
   setWordAnswer: Function;
   pageNumber: number;
   onlyAnswer: TempOnlyAnswer;
-  wordAnswer: string;
+  wordAnswer: TempWordAnswer;
 };
 
 export const AnswerForm = ({
@@ -65,8 +65,8 @@ export const AnswerForm = ({
         return (
           <input
             type="text"
-            value={wordAnswer}
-            onChange={(e) => setWordAnswer(e.target.value)}
+            value={wordAnswer.answer}
+            onChange={(e) => setWordAnswer({ questionId: pageNumber, answer: e.target.value })}
             className="form-input h-full w-full border-gray-300 p-2 border-blue rounded-sm text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-1"
           />
         );

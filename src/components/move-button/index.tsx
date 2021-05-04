@@ -1,5 +1,5 @@
 import { TypeQuestion } from "src/models/question";
-import type { TempUserAnswer } from "src/components/question";
+import type { TempUserAnswer, TempWordAnswer } from "src/components/question";
 import type { TempOnlyAnswer } from "src/components/question";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   questionData: TypeQuestion;
   userAnswers: TempUserAnswer[]
   onlyAnswer: TempOnlyAnswer
-  wordAnswer: string;
+  wordAnswer: TempWordAnswer;
 };
 
 export const MoveButton = ({
@@ -37,25 +37,17 @@ export const MoveButton = ({
             );
         break;
       case "only":
-        const tmpUserOnlyAnswer: TempUserAnswer = {
-          questionId: pageNumber,
-          answer: onlyAnswer.answer,
-        };
         !userAnswers[pageNumber - 1]
-          ? setUserAnswers([...userAnswers, tmpUserOnlyAnswer])
+          ? setUserAnswers([...userAnswers, onlyAnswer])
           : setUserAnswers(
-              userAnswers.map((userAnswer) => (userAnswer.questionId === pageNumber ? tmpUserOnlyAnswer : userAnswer))
+              userAnswers.map((userAnswer) => (userAnswer.questionId === pageNumber ? onlyAnswer : userAnswer))
             );
         break;
       case "word":
-        const tmpUserWordAnswer: TempUserAnswer = {
-          questionId: pageNumber,
-          answer: wordAnswer,
-        };
         !userAnswers[pageNumber - 1]
-          ? setUserAnswers([...userAnswers, tmpUserWordAnswer])
+          ? setUserAnswers([...userAnswers, wordAnswer])
           : setUserAnswers(
-              userAnswers.map((userAnswer) => (userAnswer.questionId === pageNumber ? tmpUserWordAnswer : userAnswer))
+              userAnswers.map((userAnswer) => (userAnswer.questionId === pageNumber ? wordAnswer : userAnswer))
             );
         break;
     }

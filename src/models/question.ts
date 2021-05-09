@@ -1,52 +1,57 @@
+export type TypeAnswerTypes = "checkbox" | "radio" | "text";
+
 export type TypeQuestion = {
-  id: number,
-  userId: number,
-  work: string,
-  question: string,
-  type: 'mulch' | 'only' | 'word'
-}
+  questionId: number;
+  userId: number;
+  work: string;
+  question: string;
+  type: TypeAnswerTypes;
+};
 
 export const EXAMPLE_QUESTION_LIST: TypeQuestion[] = [
   {
-    id: 1,
     userId: 1,
-    work: '国語',
+    work: "国語",
     question: '"国語"この漢字の読み方は？（ひらがな3文字）',
-    type: 'word',
+    type: "text",
   },
   {
-    id: 6,
     userId: 1,
-    work: '国語',
+    work: "国語",
     question: '"数学"この漢字の読み方は？（ひらがな4文字）',
-    type: 'word',
+    type: "text",
   },
   {
-    id: 2,
     userId: 1,
-    work: '国語',
-    question: '四文字熟語を選択してください。',
-    type: 'mulch',
+    work: "国語",
+    question: "四文字熟語を選択してください。",
+    type: "checkbox",
   },
   {
-    id: 3,
     userId: 1,
-    work: '国語',
+    work: "国語",
+    question: "三文字熟語を選択してください。",
+    type: "checkbox",
+  },
+  {
+    userId: 1,
+    work: "国語",
     question: '"走れメロス"の作者は誰ですか？',
-    type: 'only',
+    type: "radio",
   },
   {
-    id: 4,
     userId: 1,
-    work: '音楽',
+    work: "音楽",
     question: '"運命"の作者は誰ですか？',
-    type: 'only',
+    type: "radio",
   },
   {
-    id: 5,
-    userId: 3,
-    work: '数学',
-    question: '1+1',
-    type: 'word',
-  }
-]
+    userId: 1,
+    work: "数学",
+    question: "1+1=?",
+    type: "text",
+  },
+].map((question, index) => ({
+  ...question,
+  questionId: index + 1,
+})) as TypeQuestion[];

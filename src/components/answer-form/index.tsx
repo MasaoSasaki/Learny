@@ -1,72 +1,88 @@
 import { TypeQuestion } from "src/models/question";
 import { TypeAnswer } from "src/models/answer";
-import { TempOnlyAnswer, TempWordAnswer } from "src/components/question";
+import type { UserAnswer } from "src/components/question";
 
 type Props = {
-  questionData: TypeQuestion;
+  questionData: TypeQuestion & { questionId: number };
   answerDataList: TypeAnswer[];
-  setOnlyAnswer: Function;
-  setWordAnswer: Function;
+  setCheckboxAnswers: Function;
+  setRadioAnswer: Function;
+  setTextAnswer: Function;
   pageNumber: number;
-  onlyAnswer: TempOnlyAnswer;
-  wordAnswer: TempWordAnswer;
+  checkboxAnswers: string[];
+  radioAnswer: string;
+  textAnswer: string;
+  userAnswers: UserAnswer[];
 };
 
 export const AnswerForm = ({
   questionData,
   answerDataList,
-  setOnlyAnswer,
-  setWordAnswer,
+  setCheckboxAnswers,
+  setRadioAnswer,
+  setTextAnswer,
   pageNumber,
-  onlyAnswer,
-  wordAnswer,
+  checkboxAnswers,
+  radioAnswer,
+  textAnswer,
+  userAnswers,
 }: Props): JSX.Element => {
   const form = () => {
+    let options: string[] | undefined = answerDataList.filter(
+      (answerData) => answerData.questionId === questionData.questionId
+    )[0].options;
     switch (questionData.type) {
-      case "mulch":
+      case "checkbox":
         return (
           <>
-            {answerDataList.map(({ questionId, answer }, index) => {
-              if (questionId !== questionData.id) return;
+            {(options as string[]).map((option, index) => {
               return (
                 <div className="m-3" key={index}>
                   <label className="flex items-center">
-                    <input type="checkbox" className="m-2 form-checkbox h-5 w-5" />
-                    <span className="ml-2">{answer}</span>
+                    <input
+                      type="checkbox"
+                      className="m-2 form-checkbox h-5 w-5"
+                      onChange={() => {
+                        checkboxAnswers.includes(option)
+                          ? setCheckboxAnswers(checkboxAnswers.filter((checkboxAnswer) => checkboxAnswer !== option))
+                          : setCheckboxAnswers([...checkboxAnswers, option]);
+                      }}
+                      checked={checkboxAnswers.includes(option)}
+                    />
+                    <span className="ml-2">{option}</span>
                   </label>
                 </div>
               );
             })}
           </>
         );
-      case "only":
+      case "radio":
         return (
           <>
-            {answerDataList.map(({ questionId, answer }, index) => {
-              if (questionId !== questionData.id) return;
+            {(options as string[]).map((option, index) => {
               return (
                 <div className="m-3" key={index}>
                   <label className="flex items-center">
                     <input
                       type="radio"
-                      name={`question${questionData.id}`}
+                      name={`question${index}`}
                       className="m-2 block form-radio h-5 w-5 text-blue-600"
-                      onChange={() => setOnlyAnswer({ questionId: pageNumber, answer: answer })}
-                      checked={onlyAnswer.questionId === pageNumber && onlyAnswer.answer === answer}
+                      onChange={() => setRadioAnswer(option)}
+                      checked={radioAnswer === option}
                     />
-                    <span className="ml-2">{answer}</span>
+                    <span className="ml-2">{option}</span>
                   </label>
                 </div>
               );
             })}
           </>
         );
-      case "word":
+      case "text":
         return (
           <input
             type="text"
-            value={wordAnswer.answer}
-            onChange={(e) => setWordAnswer({ questionId: pageNumber, answer: e.target.value })}
+            value={textAnswer}
+            onChange={(e) => setTextAnswer(e.target.value)}
             className="form-input h-full w-full border-gray-300 p-2 border-blue rounded-sm text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-1"
           />
         );

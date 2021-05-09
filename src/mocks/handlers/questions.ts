@@ -10,9 +10,11 @@ export const questionsHandlers = [
     (req, res, ctx) => {
       const { userId } = req.params;
       const createQuestionList = (): TypeQuestion[] => {
-        let resQuestionList = shuffle<TypeQuestion>(EXAMPLE_QUESTION_LIST.filter(
-          (question) => question.userId === Number(userId)
-        ));
+        let resQuestionList = shuffle<TypeQuestion>(
+          EXAMPLE_QUESTION_LIST.filter(
+            (question) => question.userId === Number(userId) // TODO: develop
+          )
+        );
         if (req.url.searchParams.get("count")) {
           const count: number =
             resQuestionList.length > Number(req.url.searchParams.get("count"))

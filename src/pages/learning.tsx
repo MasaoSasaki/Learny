@@ -5,18 +5,15 @@ import type { TypeQuestion } from "../models/question";
 import type { TypeAnswer } from "../models/answer";
 
 type Props = {
-  resQuestionDataList: TypeQuestion[] & { currentQuestionId: number };
+  resQuestionDataList: TypeQuestion[];
   answerDataList: TypeAnswer[];
 };
 
 export default function Learning(props: Props): JSX.Element {
-  const currentQuestionDataList = props.resQuestionDataList.map((item, index) => ({
-    ...item,
-    currentQuestionId: index + 1,
-  }));
+  console.log("questionDataList", props.resQuestionDataList)
   return (
     <Layout>
-      <Question currentQuestionDataList={currentQuestionDataList} answerDataList={props.answerDataList} />
+      <Question questionDataList={props.resQuestionDataList} answerDataList={props.answerDataList} />
     </Layout>
   );
 }

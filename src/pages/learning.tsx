@@ -1,8 +1,7 @@
 import { Layout } from "src/components/layout";
 import { Question } from "src/components/question";
 import { GetServerSideProps } from "next";
-import type { TypeQuestion } from "../models/question";
-import type { TypeAnswer } from "../models/answer";
+import type { TypeAnswer, TypeQuestion } from "src/types/types";
 
 type Props = {
   resQuestionDataList: TypeQuestion[];

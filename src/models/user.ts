@@ -1,10 +1,4 @@
-export type UserList = {
-  id: number;
-  name: string;
-  twitter: string;
-  facebook: string;
-  instagram: string;
-};
+import type {UserList} from "src/types/types"
 
 export const EXAMPLE_USER_LIST: UserList[] = [
   {

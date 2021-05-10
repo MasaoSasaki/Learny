@@ -1,17 +1,12 @@
-import { useState, useEffect } from "react";
-import type { TypeQuestion } from "src/models/question";
-import type { TypeAnswer } from "src/models/answer";
+import { useState } from "react"
+import type { TypeAnswer, TypeQuestion } from "src/types/types";
 import { MoveButton } from "src/components/move-button";
 import { AnswerForm } from "src/components/answer-form";
+import type { UserAnswer } from "src/types/types";
 
 type Props = {
   questionDataList: TypeQuestion[];
   answerDataList: TypeAnswer[];
-};
-
-export type UserAnswer = {
-  questionId: number;
-  answer: string | number[];
 };
 
 export function Question({ questionDataList, answerDataList }: Props): JSX.Element {

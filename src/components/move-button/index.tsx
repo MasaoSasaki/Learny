@@ -1,5 +1,5 @@
-import { TypeAnswerTypes, TypeQuestion } from "src/models/question";
-import type { UserAnswer } from "src/components/question";
+import { TypeQuestionTypes, TypeQuestion } from "src/types/types";
+import type { UserAnswer } from "src/types/types";
 
 type Props = {
   pageNumber: number;
@@ -30,7 +30,7 @@ export const MoveButton = ({
   questionDataList,
   questionData,
 }: Props): JSX.Element => {
-  const movePage = (button: string, type: TypeAnswerTypes) => {
+  const movePage = (button: string, type: TypeQuestionTypes) => {
     console.log(`stateの更新を開始します。-----------------------------------`);
     // Prevが押された時の処理
     if (button === "prev") {

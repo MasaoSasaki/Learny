@@ -1,7 +1,7 @@
 import { rest } from "msw";
-import type { TypeAnswer } from "src/models/answer";
+import type { TypeAnswer } from "src/types/types";
 import { EXAMPLE_ANSWER_LIST } from "src/models/answer";
-import {shuffle} from "src/function"
+import {shuffle} from "src/utils/function"
 
 export const answersHandlers = [
   // 正解情報を取得する

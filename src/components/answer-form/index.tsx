@@ -1,6 +1,5 @@
-import { TypeQuestion } from "src/models/question";
-import { TypeAnswer } from "src/models/answer";
-import type { UserAnswer } from "src/components/question";
+import { TypeQuestion, TypeAnswer } from "src/types/types";
+import type { UserAnswer } from "src/types/types";
 
 type Props = {
   questionData: TypeQuestion & { questionId: number };

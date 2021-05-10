@@ -1,7 +1,7 @@
 import { rest } from "msw";
-import type { TypeQuestion } from "src/models/question";
+import type { TypeQuestion } from "src/types/types";
 import { EXAMPLE_QUESTION_LIST } from "src/models/question";
-import { shuffle } from "src/function";
+import { shuffle } from "src/utils/function";
 
 export const questionsHandlers = [
   // 特定のユーザーの問題集をcount分取得する

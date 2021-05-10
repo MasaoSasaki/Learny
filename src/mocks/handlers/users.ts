@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import type { UserList } from "src/models/user";
+import type { UserList } from "src/types/types";
 import { EXAMPLE_USER_LIST } from "src/models/user";
 
 export const usersHandlers = [

@@ -1,9 +1,4 @@
-export type TypeAnswer = {
-  questionId: number;
-  type: "checkbox" | "radio" | "text"
-  options?: string[]
-  answer: string;
-};
+import type {TypeAnswer} from "src/types/types"
 
 export const EXAMPLE_ANSWER_LIST: TypeAnswer[] = [
   {

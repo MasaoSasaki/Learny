@@ -17,6 +17,7 @@ export type TypeQuestion = {
   work: string;
   question: string;
   type: TypeQuestionTypes;
+  commentary: string;
 };
 
 export type UserList = {

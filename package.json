@@ -24,6 +24,9 @@
     "printWidth": 120
   },
   "dependencies": {
+    "@headlessui/react": "^1.2.0",
+    "@heroicons/react": "^1.0.1",
+    "@material-ui/core": "^4.11.4",
     "next": "10.0.9",
     "next-themes": "^0.0.12",
     "react": "17.0.1",

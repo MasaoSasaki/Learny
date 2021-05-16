@@ -3,14 +3,14 @@ export type UserAnswer = {
   answer: string | number[];
 };
 
+export type TypeQuestionTypes = "checkbox" | "radio" | "text";
 export type TypeAnswer = {
   questionId: number;
-  type: "checkbox" | "radio" | "text";
+  type: TypeQuestionTypes;
   options?: string[];
   answer: string;
 };
 
-export type TypeQuestionTypes = "checkbox" | "radio" | "text";
 export type TypeQuestion = {
   questionId: number;
   userId: number;

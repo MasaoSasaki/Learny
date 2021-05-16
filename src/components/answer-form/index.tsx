@@ -20,13 +20,11 @@ export const AnswerForm = ({
   setCheckboxAnswers,
   setRadioAnswer,
   setTextAnswer,
-  pageNumber,
   checkboxAnswers,
   radioAnswer,
   textAnswer,
-  userAnswers,
 }: Props): JSX.Element => {
-  const form = () => {
+  const form = ():JSX.Element => {
     let options: string[] | undefined = answerDataList.filter(
       (answerData) => answerData.questionId === questionData.questionId
     )[0].options;

@@ -1,4 +1,4 @@
-import type {TypeAnswer} from "src/types/types"
+import type { TypeAnswer } from "src/types/types";
 
 export const EXAMPLE_ANSWER_LIST: TypeAnswer[] = [
   {
@@ -12,21 +12,21 @@ export const EXAMPLE_ANSWER_LIST: TypeAnswer[] = [
   {
     type: "checkbox",
     options: ["森羅万象", "熟語", "空前絶後", "四文字"],
-    answer:["森羅万象", "空前絶後"]
+    answer: ["森羅万象", "空前絶後"],
   },
   {
     type: "checkbox",
     options: ["四季折", "一塁打", "平々凡々"],
-    answer: ["四季折", "一塁打"]
+    answer: ["四季折", "一塁打"],
   },
   {
     type: "radio",
     options: ["太宰治", "芥川龍之介", "村上春樹"],
-    answer: "太宰治"
+    answer: "太宰治",
   },
   {
     type: "radio",
-    options: ["ベートヴェン", "シューベルト", "バッハ"],
+    options: ["ベートーヴェン", "シューベルト", "バッハ"],
     answer: "ベートーヴェン",
   },
   {
@@ -35,5 +35,5 @@ export const EXAMPLE_ANSWER_LIST: TypeAnswer[] = [
   },
 ].map((answer, index) => ({
   ...answer,
-  questionId: index + 1
+  questionId: index + 1,
 })) as TypeAnswer[];

@@ -20,13 +20,13 @@ export default function MyPage(props: Props): JSX.Element {
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const resUser = await fetch("http://localhost:3000/users/1"); // TODO: 1を動的に変更
+  const resUser = await fetch("http://localhost:3001/users/1"); // TODO: 1を動的に変更
   const userData = await resUser.json();
-  const resQuestionList = await fetch("http://localhost:3000/users/1/questions"); // TODO: 1を動的に変更
+  const resQuestionList = await fetch("http://localhost:3001/users/1/questions"); // TODO: 1を動的に変更
   const questionDataList = await resQuestionList.json();
   return {
     props: {
-      name: userData[0].name,
+      name: userData.name,
       questionCount: questionDataList.length,
     },
   };

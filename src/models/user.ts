@@ -1,4 +1,4 @@
-import type {UserList} from "src/types/types"
+import type { UserList } from "src/types/types";
 
 export const EXAMPLE_USER_LIST: UserList[] = [
   {

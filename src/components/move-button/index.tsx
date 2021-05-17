@@ -82,7 +82,7 @@ export const MoveButton = ({
       questionId: number;
       answer: string;
     } = {
-      questionId: questionData.questionId,
+      questionId: questionData.id,
       answer: textAnswer,
     };
     if (userAnswers[pageNumber - 1] === undefined) {
@@ -90,7 +90,7 @@ export const MoveButton = ({
     } else {
       setUserAnswers(
         userAnswers.map((userAnswer) =>
-          userAnswer.questionId === questionData.questionId ? tmpTextAnswer : userAnswer
+          userAnswer.questionId === questionData.id ? tmpTextAnswer : userAnswer
         )
       );
     }
@@ -101,7 +101,7 @@ export const MoveButton = ({
       questionId: number;
       answer: string;
     } = {
-      questionId: questionData.questionId,
+      questionId: questionData.id,
       answer: radioAnswer,
     };
     if (userAnswers[pageNumber - 1] === undefined) {
@@ -109,7 +109,7 @@ export const MoveButton = ({
     } else {
       setUserAnswers(
         userAnswers.map((userAnswer) =>
-          userAnswer.questionId === questionData.questionId ? tmpRadioAnswer : userAnswer
+          userAnswer.questionId === questionData.id ? tmpRadioAnswer : userAnswer
         )
       );
     }
@@ -120,7 +120,7 @@ export const MoveButton = ({
       questionId: number;
       answer: string[];
     } = {
-      questionId: questionData.questionId,
+      questionId: questionData.id,
       answer: checkboxAnswers,
     };
     if (userAnswers[pageNumber - 1] === undefined) {
@@ -128,7 +128,7 @@ export const MoveButton = ({
     } else {
       setUserAnswers(
         userAnswers.map((userAnswer) =>
-          userAnswer.questionId === questionData.questionId ? tmpCheckboxAnswers : userAnswer
+          userAnswer.questionId === questionData.id ? tmpCheckboxAnswers : userAnswer
         )
       );
     }

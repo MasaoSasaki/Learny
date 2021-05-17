@@ -12,7 +12,7 @@ export type TypeAnswer = {
 };
 
 export type TypeQuestion = {
-  questionId: number;
+  id: number;
   userId: number;
   work: string;
   question: string;

@@ -22,9 +22,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
   const isAll = context.query.all;
   const resQuestion =
     isAll === "true"
-      ? await fetch(`http://localhost:3000/users/1/questions?isAll=true`)
-      : await fetch(`http://localhost:3000/users/1/questions?count=${count}`);
-  const resAnswer = await fetch(`https://localhost:3000/answers`);
+      ? await fetch(`http://localhost:3001/users/1/questions?isAll=true`)
+      : await fetch(`http://localhost:3001/users/1/questions?count=${count}`);
+  const resAnswer = await fetch(`http://localhost:3001/answers`);
   const resQuestionDataList = await resQuestion.json();
   const answerDataList = await resAnswer.json();
   return {

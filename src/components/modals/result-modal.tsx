@@ -120,7 +120,7 @@ export const ResultModal = ({
                       onClick={() => isModalWindow(false)}
                     ></XIcon>
                     <Dialog.Title as="h3" className="text-lg leading-6 font-bold text-gray-900 dark:text-gray-200">
-                      問題{questionData.questionId}
+                      問題{questionData.id}
                     </Dialog.Title>
                     <p className="text-left font-normal">{questionData.question}</p>
                     <div className="mt-2">

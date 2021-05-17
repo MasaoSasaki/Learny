@@ -2,7 +2,7 @@ import { TypeQuestion, TypeAnswer } from "src/types/types";
 import type { UserAnswer } from "src/types/types";
 
 type Props = {
-  questionData: TypeQuestion & { questionId: number };
+  questionData: TypeQuestion;
   answerDataList: TypeAnswer[];
   setCheckboxAnswers: Function;
   setRadioAnswer: Function;
@@ -26,7 +26,7 @@ export const AnswerForm = ({
 }: Props): JSX.Element => {
   const form = ():JSX.Element => {
     let options: string[] | undefined = answerDataList.filter(
-      (answerData) => answerData.questionId === questionData.questionId
+      (answerData) => answerData.questionId === questionData.id
     )[0].options;
     switch (questionData.type) {
       case "checkbox":

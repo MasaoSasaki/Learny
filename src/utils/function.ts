@@ -9,15 +9,15 @@ export const shuffle = <T extends {}>([...array]: T[]): T[] => {
 
 // timestampの時間が数字一桁なら先頭に"0"を追加する
 export const timeStamp = (): string => {
-  const addDateZero = (value: number): string => {
-    return value <= 9 ? `0${value}` : `${value}`;
-  };
+  // const addDateZero = (value: number): string => {
+  //   return value <= 9 ? `0${value}` : `${value}`;
+  // };
   const currentTime = new Date();
   const Year:string = String(currentTime.getFullYear());
-  const Month:string = addDateZero(currentTime.getMonth() + 1);
-  const Day:string = addDateZero(currentTime.getDate());
-  const Hour:string = addDateZero(currentTime.getHours());
-  const Min:string = addDateZero(currentTime.getMinutes());
-  const Sec:string = addDateZero(currentTime.getSeconds());
+  const Month:string = String(currentTime.getMonth() + 1).padStart(2, "0");
+  const Day:string = String(currentTime.getDate()).padStart(2, "0");
+  const Hour:string = String(currentTime.getHours()).padStart(2, "0");
+  const Min:string = String(currentTime.getMinutes()).padStart(2, "0");
+  const Sec:string = String(currentTime.getSeconds()).padStart(2, "0");
   return `${Year}-${Month}-${Day} ${Hour}:${Min}:${Sec}`;
 };

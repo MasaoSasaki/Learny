@@ -9,7 +9,7 @@ export const shuffle = <T extends {}>([...array]: T[]): T[] => {
 
 // timestampの時間が数字一桁なら先頭に"0"を追加する
 export const timeStamp = (): string => {
-  const currentTime = new Date();
+  const currentTime: Date = new Date();
   const Year:string = String(currentTime.getFullYear());
   const Month:string = String(currentTime.getMonth() + 1).padStart(2, "0");
   const Day:string = String(currentTime.getDate()).padStart(2, "0");

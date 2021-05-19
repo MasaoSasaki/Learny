@@ -1,9 +1,11 @@
-import { TypeQuestion, TypeAnswer } from "src/types/types";
+import { TypeQuestion } from "src/types/types";
 import type { UserAnswer } from "src/types/types";
+import { TextForm } from "src/components/answer-form/text-form";
+import { RadioForm } from "src/components/answer-form/radio-form";
+import { CheckboxForm } from "src/components/answer-form/checkbox-form";
 
 type Props = {
-  questionData: TypeQuestion;
-  answerDataList: TypeAnswer[];
+  currentQuestion: TypeQuestion;
   setCheckboxAnswers: Function;
   setRadioAnswer: Function;
   setTextAnswer: Function;
@@ -15,8 +17,7 @@ type Props = {
 };
 
 export const AnswerForm = ({
-  questionData,
-  answerDataList,
+  currentQuestion,
   setCheckboxAnswers,
   setRadioAnswer,
   setTextAnswer,
@@ -24,65 +25,22 @@ export const AnswerForm = ({
   radioAnswer,
   textAnswer,
 }: Props): JSX.Element => {
-  const form = ():JSX.Element => {
-    let options: string[] | undefined = answerDataList.filter(
-      (answerData) => answerData.questionId === questionData.id
-    )[0].options;
-    switch (questionData.type) {
+  const form = (): JSX.Element => {
+    switch (currentQuestion.question_type) {
       case "checkbox":
         return (
-          <>
-            {(options as string[]).map((option, index) => {
-              return (
-                <div className="m-3" key={index}>
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      className="m-2 form-checkbox h-5 w-5"
-                      onChange={() => {
-                        checkboxAnswers.includes(option)
-                          ? setCheckboxAnswers(checkboxAnswers.filter((checkboxAnswer) => checkboxAnswer !== option))
-                          : setCheckboxAnswers([...checkboxAnswers, option]);
-                      }}
-                      checked={checkboxAnswers.includes(option)}
-                    />
-                    <span className="ml-2">{option}</span>
-                  </label>
-                </div>
-              );
-            })}
-          </>
+          <CheckboxForm
+            currentQuestion={currentQuestion}
+            checkboxAnswers={checkboxAnswers}
+            setCheckboxAnswers={setCheckboxAnswers}
+          />
         );
       case "radio":
         return (
-          <>
-            {(options as string[]).map((option, index) => {
-              return (
-                <div className="m-3" key={index}>
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name={`question${index}`}
-                      className="m-2 block form-radio h-5 w-5 text-blue-600"
-                      onChange={() => setRadioAnswer(option)}
-                      checked={radioAnswer === option}
-                    />
-                    <span className="ml-2">{option}</span>
-                  </label>
-                </div>
-              );
-            })}
-          </>
+          <RadioForm currentQuestion={currentQuestion} radioAnswer={radioAnswer} setRadioAnswer={setRadioAnswer} />
         );
       case "text":
-        return (
-          <input
-            type="text"
-            value={textAnswer}
-            onChange={(e) => setTextAnswer(e.target.value)}
-            className="form-input h-full w-full border-gray-300 p-2 border-blue rounded-sm text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-1"
-          />
-        );
+        return <TextForm textAnswer={textAnswer} setTextAnswer={setTextAnswer} />;
     }
   };
   return (

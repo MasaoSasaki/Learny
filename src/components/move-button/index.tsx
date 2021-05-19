@@ -6,15 +6,14 @@ type Props = {
   pageNumber: number;
   changePageNumber: Function;
   setUserAnswers: Function;
-  setCheckboxAnswers: Function;
-  setRadioAnswer: Function;
-  setTextAnswer: Function;
   questionDataList: TypeQuestion[];
-  questionData: TypeQuestion;
   userAnswers: UserAnswer[];
   checkboxAnswers: string[];
+  setCheckboxAnswers: Function;
   radioAnswer: string;
+  setRadioAnswer: Function;
   textAnswer: string;
+  setTextAnswer: Function;
 };
 
 export const MoveButton = ({
@@ -29,7 +28,6 @@ export const MoveButton = ({
   radioAnswer,
   textAnswer,
   questionDataList,
-  questionData,
 }: Props): JSX.Element => {
   const currentQuestion: TypeQuestion = questionDataList[pageNumber - 1];
   const movePage = (button: string, type: TypeQuestionTypes) => {
@@ -84,14 +82,14 @@ export const MoveButton = ({
       questionId: number;
       answer: string;
     } = {
-      questionId: questionData.id,
+      questionId: currentQuestion.id,
       answer: textAnswer,
     };
     if (userAnswers[pageNumber - 1] === undefined) {
       setUserAnswers([...userAnswers, tmpTextAnswer]);
     } else {
       setUserAnswers(
-        userAnswers.map((userAnswer) => (userAnswer.questionId === questionData.id ? tmpTextAnswer : userAnswer))
+        userAnswers.map((userAnswer) => (userAnswer.questionId === currentQuestion.id ? tmpTextAnswer : userAnswer))
       );
     }
   };
@@ -101,14 +99,14 @@ export const MoveButton = ({
       questionId: number;
       answer: string;
     } = {
-      questionId: questionData.id,
+      questionId: currentQuestion.id,
       answer: radioAnswer,
     };
     if (userAnswers[pageNumber - 1] === undefined) {
       setUserAnswers([...userAnswers, tmpRadioAnswer]);
     } else {
       setUserAnswers(
-        userAnswers.map((userAnswer) => (userAnswer.questionId === questionData.id ? tmpRadioAnswer : userAnswer))
+        userAnswers.map((userAnswer) => (userAnswer.questionId === currentQuestion.id ? tmpRadioAnswer : userAnswer))
       );
     }
   };
@@ -118,14 +116,14 @@ export const MoveButton = ({
       questionId: number;
       answer: string[];
     } = {
-      questionId: questionData.id,
+      questionId: currentQuestion.id,
       answer: checkboxAnswers,
     };
     if (userAnswers[pageNumber - 1] === undefined) {
       setUserAnswers([...userAnswers, tmpCheckboxAnswers]);
     } else {
       setUserAnswers(
-        userAnswers.map((userAnswer) => (userAnswer.questionId === questionData.id ? tmpCheckboxAnswers : userAnswer))
+        userAnswers.map((userAnswer) => (userAnswer.questionId === currentQuestion.id ? tmpCheckboxAnswers : userAnswer))
       );
     }
   };
@@ -157,7 +155,7 @@ export const MoveButton = ({
           className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l ${
             pageNumber === 1 && "hidden"
           }`}
-          onClick={() => movePage("prev", currentQuestion.type)}
+          onClick={() => movePage("prev", currentQuestion.question_type)}
         >
           Prev
         </button>
@@ -165,7 +163,7 @@ export const MoveButton = ({
           className={`bg-blue-300 hover:bg-blue-400 text-gray-800 font-bold py-2 px-4 ${
             pageNumber === 1 && "rounded-l"
           } ${pageNumber === questionDataList.length && "rounded-r"}`}
-          onClick={() => submit(currentQuestion.type)}
+          onClick={() => submit(currentQuestion.question_type)}
         >
           回答を送信する
         </button>
@@ -173,7 +171,7 @@ export const MoveButton = ({
           className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r ${
             pageNumber === questionDataList.length && "hidden"
           }`}
-          onClick={() => movePage("next", currentQuestion.type)}
+          onClick={() => movePage("next", currentQuestion.question_type)}
         >
           Next
         </button>

@@ -1,18 +1,16 @@
 import { Layout } from "src/components/layout";
 import { Question } from "src/components/question";
 import { GetServerSideProps } from "next";
-import type { TypeAnswer, TypeQuestion } from "src/types/types";
+import type { TypeQuestion } from "src/types/types";
 
 type Props = {
   resQuestionDataList: TypeQuestion[];
-  answerDataList: TypeAnswer[];
 };
 
-export default function Learning({ resQuestionDataList, answerDataList }: Props): JSX.Element {
-  console.log("questionDataList", resQuestionDataList);
+export default function Learning({ resQuestionDataList }: Props): JSX.Element {
   return (
     <Layout>
-      <Question questionDataList={resQuestionDataList} answerDataList={answerDataList} />
+      <Question questionDataList={resQuestionDataList} />
     </Layout>
   );
 }
@@ -24,13 +22,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
     isAll === "true"
       ? await fetch(`http://localhost:3001/users/1/questions?isAll=true`)
       : await fetch(`http://localhost:3001/users/1/questions?count=${count}`);
-  const resAnswer = await fetch(`http://localhost:3001/answers`);
   const resQuestionDataList = await resQuestion.json();
-  const answerDataList = await resAnswer.json();
   return {
     props: {
       resQuestionDataList: resQuestionDataList,
-      answerDataList: answerDataList,
     },
   };
 };

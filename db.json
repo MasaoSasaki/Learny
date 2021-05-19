@@ -8,58 +8,72 @@
   "questions": [
     {
       "id": 1,
-      "userId": 1,
+      "user_id": 1,
       "work": "国語",
-      "question": "\"国語\"この漢字の読み方は？（ひらがな3文字）",
-      "type": "text",
+      "questions": "\"国語\"この漢字の読み方は？（ひらがな3文字）",
+      "question_type": "text",
+      "options": null,
+      "answer": "こくご",
       "commentary": "この漢字は'こくご'と読みます。日本語です。"
     },
     {
       "id": 2,
-      "userId": 1,
+      "user_id": 1,
       "work": "国語",
-      "question": "\"数学\"この漢字の読み方は？（ひらがな4文字）",
-      "type": "text",
+      "questions": "\"数学\"この漢字の読み方は？（ひらがな4文字）",
+      "question_type": "text",
+      "options": null,
+      "answer": "すうがく",
       "commentary": "この漢字は'すうがく'と読みます。日本語です。"
     },
     {
       "id": 3,
-      "userId": 1,
+      "user_id": 1,
       "work": "国語",
-      "question": "四文字熟語を選択してください。",
-      "type": "checkbox",
+      "questions": "四文字熟語を選択してください。",
+      "question_type": "checkbox",
+      "options": ["森羅万象", "熟語", "空前絶後", "四文字"],
+      "answer": ["森羅万象", "空前絶後"],
       "commentary": "4文字熟語は漢字4文字で表される熟語"
     },
     {
       "id": 4,
-      "userId": 1,
+      "user_id": 1,
       "work": "国語",
-      "question": "三文字熟語を選択してください。",
-      "type": "checkbox",
+      "questions": "三文字熟語を選択してください。",
+      "question_type": "checkbox",
+      "options": ["四季折", "一塁打", "平々凡々"],
+      "answer": ["四季折", "一塁打"],
       "commentary": "3文字熟語は漢字3文字で表される熟語"
     },
     {
       "id": 5,
-      "userId": 1,
+      "user_id": 1,
       "work": "国語",
-      "question": "\"走れメロス\"の作者は誰ですか？",
-      "type": "radio",
+      "questions": "\"走れメロス\"の作者は誰ですか？",
+      "question_type": "radio",
+      "options": ["太宰治", "芥川龍之介", "村上春樹"],
+      "answer": "太宰治",
       "commentary": "走れメロスの作者は太宰治氏です。"
     },
     {
       "id": 6,
-      "userId": 1,
+      "user_id": 1,
       "work": "音楽",
-      "question": "\"運命\"の作者は誰ですか？",
-      "type": "radio",
+      "questions": "\"運命\"の作者は誰ですか？",
+      "question_type": "radio",
+      "options": ["ベートーヴェン", "シューベルト", "バッハ"],
+      "answer": "ベートーヴェン",
       "commentary": "運命はベートヴェンが作曲しました。他の選択肢は〇〇は〇〇が代表曲になります。"
     },
     {
       "id": 7,
-      "userId": 1,
+      "user_id": 1,
       "work": "数学",
-      "question": "1+1=?",
-      "type": "text",
+      "questions": "1+1=?",
+      "question_type": "text",
+      "options": null,
+      "answer": "2",
       "commentary": "足し算です。答えは2。他1-1=0 1x1=1 1÷1=1です。"
     }
   ],
@@ -80,51 +94,28 @@
       "id": 3,
       "questionId": 3,
       "type": "checkbox",
-      "options": [
-        "森羅万象",
-        "熟語",
-        "空前絶後",
-        "四文字"
-      ],
-      "answer": [
-        "森羅万象",
-        "空前絶後"
-      ]
+      "options": ["森羅万象", "熟語", "空前絶後", "四文字"],
+      "answer": ["森羅万象", "空前絶後"]
     },
     {
       "id": 4,
       "questionId": 4,
       "type": "checkbox",
-      "options": [
-        "四季折",
-        "一塁打",
-        "平々凡々"
-      ],
-      "answer": [
-        "四季折",
-        "一塁打"
-      ]
+      "options": ["四季折", "一塁打", "平々凡々"],
+      "answer": ["四季折", "一塁打"]
     },
     {
       "id": 5,
       "questionId": 5,
       "type": "radio",
-      "options": [
-        "太宰治",
-        "芥川龍之介",
-        "村上春樹"
-      ],
+      "options": ["太宰治", "芥川龍之介", "村上春樹"],
       "answer": "太宰治"
     },
     {
       "id": 6,
       "questionId": 6,
       "type": "radio",
-      "options": [
-        "ベートーヴェン",
-        "シューベルト",
-        "バッハ"
-      ],
+      "options": ["ベートーヴェン", "シューベルト", "バッハ"],
       "answer": "ベートーヴェン"
     },
     {

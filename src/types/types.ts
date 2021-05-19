@@ -13,11 +13,13 @@ export type TypeAnswer = {
 
 export type TypeQuestion = {
   id: number;
-  userId: number;
+  user_id: number;
   work: string;
-  question: string;
-  type: TypeQuestionTypes;
+  questions: string;
+  question_type: TypeQuestionTypes;
   commentary: string;
+  options: string[] | null;
+  answer: string | string[];
 };
 
 export type UserList = {

@@ -8,12 +8,12 @@ type Props = {
   name: string;
 };
 
-export default function MyPage(props: Props): JSX.Element {
+export default function MyPage({ name, questionCount }: Props): JSX.Element {
   return (
     <Layout>
       <div className="max-w-4xl lg:max-w-6xl flex justify-around items-center h-auto flex-wrap mx-auto my-16 lg:my-0">
-        <ProfileCard name={props.name} />
-        <LearningConfig questionCount={props.questionCount} />
+        <ProfileCard name={name} />
+        <LearningConfig questionCount={questionCount} />
       </div>
     </Layout>
   );

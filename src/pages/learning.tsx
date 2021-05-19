@@ -8,8 +8,8 @@ type Props = {
   answerDataList: TypeAnswer[];
 };
 
-export default function Learning({resQuestionDataList, answerDataList}: Props): JSX.Element {
-  console.log("questionDataList", resQuestionDataList)
+export default function Learning({ resQuestionDataList, answerDataList }: Props): JSX.Element {
+  console.log("questionDataList", resQuestionDataList);
   return (
     <Layout>
       <Question questionDataList={resQuestionDataList} answerDataList={answerDataList} />

@@ -52,5 +52,5 @@ export const EXAMPLE_QUESTION_LIST: TypeQuestion[] = [
   },
 ].map((question, index) => ({
   ...question,
-  questionId: index + 1,
+  id: index + 1,
 })) as TypeQuestion[];

@@ -2,11 +2,15 @@ import { TypeQuestion } from "src/types/types";
 
 type Props = {
   currentQuestion: TypeQuestion;
-  checkboxAnswers: string[];
-  setCheckboxAnswers: Function;
-}
+  setTmpAnswer: Function;
+  tmpAnswer: string | string[];
+};
 
-export const CheckboxForm = ({currentQuestion, checkboxAnswers, setCheckboxAnswers}:Props): JSX.Element => {
+export const CheckboxForm = ({
+  currentQuestion,
+  setTmpAnswer,
+  tmpAnswer,
+}: Props): JSX.Element => {
   return (
     <>
       {(currentQuestion.options as string[]).map((option, index) => {
@@ -17,11 +21,13 @@ export const CheckboxForm = ({currentQuestion, checkboxAnswers, setCheckboxAnswe
                 type="checkbox"
                 className="m-2 form-checkbox h-5 w-5"
                 onChange={() => {
-                  checkboxAnswers.includes(option)
-                    ? setCheckboxAnswers(checkboxAnswers.filter((checkboxAnswer) => checkboxAnswer !== option))
-                    : setCheckboxAnswers([...checkboxAnswers, option]);
+                  if (tmpAnswer.includes(option)) {
+                    setTmpAnswer((tmpAnswer as string[]).filter((answer) => answer !== option));
+                  } else {
+                    setTmpAnswer([...(tmpAnswer as string[]), option]);
+                  }
                 }}
-                checked={checkboxAnswers.includes(option)}
+                checked={tmpAnswer.includes(option)}
               />
               <span className="ml-2">{option}</span>
             </label>
@@ -30,4 +36,4 @@ export const CheckboxForm = ({currentQuestion, checkboxAnswers, setCheckboxAnswe
       })}
     </>
   );
-}
+};

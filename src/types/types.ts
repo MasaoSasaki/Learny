@@ -1,6 +1,5 @@
-export type UserAnswer = {
-  questionId: number;
-  answer: string | number[];
+export type TypeUserAnswer = TypeQuestion & {
+  tmpAnswer: string | string[];
 };
 
 export type TypeQuestionTypes = "checkbox" | "radio" | "text";
@@ -8,7 +7,7 @@ export type TypeAnswer = {
   questionId: number;
   type: TypeQuestionTypes;
   options?: string[];
-  answer: string;
+  collect_answer: string;
 };
 
 export type TypeQuestion = {
@@ -19,7 +18,7 @@ export type TypeQuestion = {
   question_type: TypeQuestionTypes;
   commentary: string;
   options: string[] | null;
-  answer: string | string[];
+  collect_answer: string | string[];
 };
 
 export type UserList = {

@@ -2,11 +2,11 @@ import { TypeQuestion } from "src/types/types";
 
 type Props = {
   currentQuestion: TypeQuestion;
-  radioAnswer: string;
-  setRadioAnswer: Function;
+  tmpAnswer: string;
+  setTmpAnswer: Function;
 };
 
-export const RadioForm = ({ currentQuestion, radioAnswer, setRadioAnswer }: Props): JSX.Element => {
+export const RadioForm = ({ currentQuestion, tmpAnswer, setTmpAnswer }: Props): JSX.Element => {
   return (
     <>
       {(currentQuestion.options as string[]).map((option, index) => {
@@ -17,8 +17,8 @@ export const RadioForm = ({ currentQuestion, radioAnswer, setRadioAnswer }: Prop
                 type="radio"
                 name={`question${index}`}
                 className="m-2 block form-radio h-5 w-5 text-blue-600"
-                onChange={() => setRadioAnswer(option)}
-                checked={radioAnswer === option}
+                onChange={() => setTmpAnswer(option)}
+                checked={tmpAnswer === option}
               />
               <span className="ml-2">{option}</span>
             </label>

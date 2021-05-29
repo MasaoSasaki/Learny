@@ -2,20 +2,26 @@ import { useState } from "react";
 import type { TypeQuestion } from "src/types/types";
 import { MoveButton } from "src/components/move-button";
 import { AnswerForm } from "src/components/answer-form";
-import type { UserAnswer } from "src/types/types";
+import type { TypeUserAnswer } from "src/types/types";
 
 type Props = {
   questionDataList: TypeQuestion[];
 };
 
-export function Question({questionDataList}:Props ): JSX.Element {
+export function Question({ questionDataList }: Props): JSX.Element {
   console.log("render------------------------------------------------------------------");
   const [pageNumber, changePageNumber] = useState<number>(1);
-  const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
-  const [textAnswer, setTextAnswer] = useState<string>("");
-  const [checkboxAnswers, setCheckboxAnswers] = useState<string[]>([]);
-  const [radioAnswer, setRadioAnswer] = useState<string>("");
+  // 問題ごとに回答を保存するキーを作成
+  const [userAnswers, setUserAnswers] = useState<TypeUserAnswer[]>(
+    questionDataList.map((questionData) => {
+      return { ...questionData, tmpAnswer: "" };
+    })
+  );
+  const [tmpAnswer, setTmpAnswer] = useState<string | string[]>("");
+  console.log(tmpAnswer)
+  // 現在表示中の問題
   const currentQuestion: TypeQuestion = questionDataList[pageNumber - 1];
+  console.log(userAnswers)
 
   return (
     <div className="w-11/12 lg:w-10/12 rounded-lg lg:rounded-l-lg shadow-2xl bg-white mx-auto my-12 dark:bg-gray-700 transition-all">
@@ -24,15 +30,9 @@ export function Question({questionDataList}:Props ): JSX.Element {
         <p>{currentQuestion.questions}</p>
         <div className="mx-auto w-full pt-3 border-b-2 border-blue-500" />
         <AnswerForm
-          pageNumber={pageNumber}
           currentQuestion={currentQuestion}
-          setCheckboxAnswers={setCheckboxAnswers}
-          setRadioAnswer={setRadioAnswer}
-          setTextAnswer={setTextAnswer}
-          checkboxAnswers={checkboxAnswers}
-          radioAnswer={radioAnswer}
-          textAnswer={textAnswer}
-          userAnswers={userAnswers}
+          setTmpAnswer={setTmpAnswer}
+          tmpAnswer={tmpAnswer}
         />
         <MoveButton
           pageNumber={pageNumber}
@@ -40,12 +40,8 @@ export function Question({questionDataList}:Props ): JSX.Element {
           setUserAnswers={setUserAnswers}
           questionDataList={questionDataList}
           userAnswers={userAnswers}
-          checkboxAnswers={checkboxAnswers}
-          setCheckboxAnswers={setCheckboxAnswers}
-          radioAnswer={radioAnswer}
-          setRadioAnswer={setRadioAnswer}
-          textAnswer={textAnswer}
-          setTextAnswer={setTextAnswer}
+          setTmpAnswer={setTmpAnswer}
+          tmpAnswer={tmpAnswer}
         />
       </div>
     </div>

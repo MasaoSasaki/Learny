@@ -5,37 +5,87 @@ exports[`Home page matches snapshot 1`] = `
   <div
     class="min-h-screen flex flex-col"
   >
-    <header>
+    <header
+      class="p-4"
+    >
       <h1>
-        Title
+        Laerny
       </h1>
       <nav>
         <a
-          class="inline-block p-4"
+          class="inline-block p-2"
           href="/"
         >
           Home
         </a>
         <a
-          class="inline-block p-4"
+          class="inline-block p-2"
           href="/about"
         >
-          About
+          使い方
+        </a>
+        <a
+          class="inline-block p-2"
+          href="/workbooks"
+        >
+          問題集を編集する
+        </a>
+        <a
+          class="inline-block p-2"
+          href="/mypage"
+        >
+          設定変更
         </a>
       </nav>
+      <div
+        class="absolute top-0 right-0 h-12 w-18 p-4"
+      >
+        <button
+          class="js-change-theme focus:outline-none"
+        >
+          <svg
+            class="w-10 h-10 text-yellow-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+          <svg
+            class="w-10 h-10 text-yellow-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </button>
+      </div>
     </header>
-    <main
-      class="flex-1 bg-red-300"
-    >
+    <main>
       <button
         class="p-2"
       >
         Click me!
       </button>
     </main>
-    <footer>
+    <footer
+      class="text-center py-4"
+    >
       <small>
-        © 20xx example
+        © 2021 MasaoSasaki
       </small>
     </footer>
   </div>

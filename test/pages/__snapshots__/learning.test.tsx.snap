@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Learning page matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="min-h-screen flex flex-col"
+  >
+    <header
+      class="p-4"
+    >
+      <h1>
+        Laerny
+      </h1>
+      <nav>
+        <a
+          class="inline-block p-2"
+          href="/"
+        >
+          Home
+        </a>
+        <a
+          class="inline-block p-2"
+          href="/about"
+        >
+          使い方
+        </a>
+        <a
+          class="inline-block p-2"
+          href="/workbooks"
+        >
+          問題集を編集する
+        </a>
+        <a
+          class="inline-block p-2"
+          href="/mypage"
+        >
+          設定変更
+        </a>
+      </nav>
+      <div
+        class="absolute top-0 right-0 h-12 w-18 p-4"
+      >
+        <button
+          class="js-change-theme focus:outline-none"
+        >
+          <svg
+            class="w-10 h-10 text-yellow-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+          <svg
+            class="w-10 h-10 text-yellow-500"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
+    <main>
+      <div
+        class="w-11/12 lg:w-10/12 rounded-lg lg:rounded-l-lg shadow-2xl bg-white mx-auto my-12 dark:bg-gray-700 transition-all"
+      >
+        <div
+          class="p-4 text-left lg:text-left"
+        >
+          <h2
+            class="text-3xl font-bold pt-8 lg:pt-0"
+          >
+            問題：1
+          </h2>
+          <p>
+            "国語"この漢字の読み方は？（ひらがな3文字）
+          </p>
+          <div
+            class="mx-auto w-full pt-3 border-b-2 border-blue-500"
+          />
+          <div
+            class="mt-4 px-4 py-6 bg-blue-50 shadow-inner border-white rounded-xl dark:bg-gray-800"
+          >
+            <input
+              class="form-input h-full w-full border-gray-300 p-2 border-blue rounded-sm text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-1"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="pt-12 pb-8 text-center"
+          >
+            <div
+              class="inline-flex"
+            >
+              <button
+                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l hidden"
+              >
+                Prev
+              </button>
+              <button
+                class="bg-blue-300 hover:bg-blue-400 text-gray-800 font-bold py-2 px-4 rounded-l false"
+              >
+                回答を送信する
+              </button>
+              <button
+                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r false"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer
+      class="text-center py-4"
+    >
+      <small>
+        © 2021 MasaoSasaki
+      </small>
+    </footer>
+  </div>
+</DocumentFragment>
+`;

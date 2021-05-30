@@ -13,7 +13,7 @@
     "fix:eslint": "npm run lint:eslint -- --fix",
     "fix:prettier": "npm run lint:prettier -- --write",
     "test": "run-p -l -c --aggregate-output lint:* unit",
-    "unit": "jest",
+    "unit": "jest --verbose --silent",
     "json": "json-server --watch db.json --port 3001"
   },
   "babel": {

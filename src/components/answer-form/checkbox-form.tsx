@@ -29,6 +29,7 @@ export const CheckboxForm = ({
                 }}
                 checked={tmpAnswer.includes(option)}
               />
+              
               <span className="ml-2">{option}</span>
             </label>
           </div>

@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import Learning from "src/pages/learning";
-const { getQuestions } = require("test/__mocks__/questionsMock");
+const { getQuestions } = require("test/__mocks__/questionMock");
 
 beforeAll(() => {
   require("whatwg-fetch");
